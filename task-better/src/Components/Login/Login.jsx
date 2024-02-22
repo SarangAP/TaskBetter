@@ -12,6 +12,9 @@ const Login = () => {
                 <div className='input-box'>
                     <input type="password" placeholder = 'Password' required />
                 </div>
+                <div className='submit-button'>
+                <button type="button">Log in</button>
+                </div>
             </form>
         </div>
     )
