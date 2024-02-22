@@ -12,7 +12,7 @@ import mysql.connector
     Returns:
         conn (mysql.connector.connection.MySQLConnection): The MySQL database connection object if successful, None otherwise.
 """
-def db_connect(host='localhost', user='root', password='password', database='test'):
+def db_connect(host='localhost', user='root', password='adminhere', database='task_better'):
     try:
         conn = mysql.connector.connect(host=host, user=user, password=password, database=database)
         print("Connected to database")
