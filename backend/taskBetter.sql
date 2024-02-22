@@ -1,4 +1,4 @@
-DROP SCHEMA IF EXISTS tasks_better;
+DROP SCHEMA IF EXISTS task_better;
 CREATE SCHEMA task_better;
 USE task_better;
 
