@@ -5,6 +5,11 @@ body {
     
     text-align: center;
 }
+.submit-button{
+    text-align:center;
+    border: none;
+    padding: 10px 15px;
+}
 h1{
     text-align: center;
 }
