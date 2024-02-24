@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {BrowserRouter as Router, Routes,Route } from "react-router-dom";
 import './Login.css';
 
 
@@ -24,7 +23,6 @@ const Login = () => {
             console.log('After fetch:', username, password);
             if (response.ok) {
                 console.log('Login successful');
-                <h2>its working</h2>
             } else {
                 const data = await response.json();
                 console.error(data.message);
@@ -33,7 +31,6 @@ const Login = () => {
             console.error('Error during login:', error);
         }
     };
-    
 
     return (
         <div className="wrapper">
@@ -60,7 +57,7 @@ const Login = () => {
                     />
                 </div>
                 <div className='submit-button'>
-                    <button type="" onClick={handleLogin}>
+                    <button type="button" onClick={handleLogin}>
                         Log in
                     </button>
                 </div>
