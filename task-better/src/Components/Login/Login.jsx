@@ -4,11 +4,12 @@ import Home from '../Home/Home';
 
 import './Login.css';
 
-//const navigate = useNavigate();
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
     const handleLogin = async () => {
         try {
             console.log('Before fetch:', username, password);
@@ -26,7 +27,7 @@ const Login = () => {
             console.log('After fetch:', username, password);
             if (response.ok) {
                 console.log('Login successful');
-              //  navigate('/Home')
+                navigate('/home');
             } else {
                 const data = await response.json();
                 console.error(data.message);
@@ -35,6 +36,7 @@ const Login = () => {
             console.error('Error during login:', error);
         }
     };
+
 
     return (
         <div className="wrapper">
@@ -69,5 +71,6 @@ const Login = () => {
         </div>
     );
 };
+
 
 export default Login;
