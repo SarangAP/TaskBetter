@@ -9,6 +9,8 @@ import './Login.css';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [loginCheck, setLoginCheck] = useState(false);
+
     const handleLogin = async () => {
         try {
             console.log('Before fetch:', username, password);
@@ -26,13 +28,15 @@ const Login = () => {
             console.log('After fetch:', username, password);
             if (response.ok) {
                 console.log('Login successful');
-              //  navigate('/Home')
+                setLoginCheck(true);
             } else {
                 const data = await response.json();
                 console.error(data.message);
+                setLoginCheck(false);
             }
         } catch (error) {
             console.error('Error during login:', error);
+            setLoginCheck(false);
         }
     };
 
