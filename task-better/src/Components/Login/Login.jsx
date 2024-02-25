@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Home from '../Home/Home';
 
 import './Login.css';
 
@@ -8,6 +7,7 @@ import './Login.css';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [currentUser, setCurrentUser] = useState(null);
     const navigate = useNavigate();
 
     const handleLogin = async () => {
@@ -27,7 +27,8 @@ const Login = () => {
             console.log('After fetch:', username, password);
             if (response.ok) {
                 console.log('Login successful');
-                navigate('/home');
+              //  setCurrentUser(username);
+                navigate('/home', {state: { currentUser: username } });
             } else {
                 const data = await response.json();
                 console.error(data.message);
