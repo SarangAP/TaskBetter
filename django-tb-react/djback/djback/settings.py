@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'tb'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'task_better',
         'USER': 'root',
-        'PASSWORD': 'adminhere',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '3306',
     }
