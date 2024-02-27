@@ -78,6 +78,13 @@ WSGI_APPLICATION = 'djback.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # Please do not modify the DB information here, do this in the .env file in project root directory
+# In your .env file please put the following below and fill in the data
+#DB_NAME=task_better
+#DB_USER=
+#DB_PASSWORD=
+#DB_HOST=localhost
+#DB_PORT=3306
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
