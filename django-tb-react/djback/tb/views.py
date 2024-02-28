@@ -72,7 +72,10 @@ def login_view(request):
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @csrf_exempt
     def get(self, request):
         user = request.user
+        print(f'Who is trying to see: {user}')
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
