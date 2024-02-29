@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TaskForm = () => {
+const TaskForm = ({addTask}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -12,6 +12,9 @@ const TaskForm = () => {
       console.log("Title and description cannot be empty");
       // return;
     }
+
+    // Temporary code for displaying created tasks in tasks view
+    addTask({title, description});
 
     fetch("http://127.0.0.1:8000/tasks/", {
       method: "POST",
@@ -32,7 +35,9 @@ const TaskForm = () => {
   };
 
   return (
-    <div>
+    <div className="container-fluid h-100 pt-5 pb-5 pl-2 pr-2 rounded-4" style={{
+      backgroundColor: "#A1D0D0",
+    }}>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <input
@@ -53,7 +58,7 @@ const TaskForm = () => {
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary mx-auto">
           Submit
         </button>
       </form>
