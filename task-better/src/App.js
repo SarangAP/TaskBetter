@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './Components/Login/Login'
 import Home from './Components/Home/Home';
-import TBNav from './Components/TBNav/TBNav';
+import TaskPage from './Components/Tasks/TaskPage';
 import Profile from './Components/Profile';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
         <Route path="/home" element={<DefaultContainer><Home/></DefaultContainer>} />
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/tasks" element={<TaskPage />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
