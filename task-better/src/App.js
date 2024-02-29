@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LoginContainer />} />
-        <Route element={<DefaultContainer/>}> <Route path="/home" element={<Home />} /></Route>
+        <Route path="/home" element={<DefaultContainer><Home/></DefaultContainer>} />
       </Routes>
     </Router>
 
@@ -18,8 +18,7 @@ function App() {
 }
 const LoginContainer = () => (
   <div className="container">
-    {/* <Route exact path="/" element={<Redirect to="/login" />} /> */}
-    <Route path="/login" element={<Login />} />
+    <Login />
   </div>
 );
 
@@ -27,9 +26,7 @@ const LoginContainer = () => (
 const DefaultContainer = ({ children }) => (
   <div>
     <Nav/>
-    <div className="container">
-      {children}
-    </div>
+    {children}
   </div>
 );
 
