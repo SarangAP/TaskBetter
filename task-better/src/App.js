@@ -4,6 +4,7 @@ import './App.css';
 import Login from './Components/Login/Login'
 import Home from './Components/Home/Home';
 import TBNav from './Components/TBNav/TBNav';
+import Profile from './Components/Profile';
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginContainer />} />
         <Route path="/home" element={<DefaultContainer><Home/></DefaultContainer>} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
 
