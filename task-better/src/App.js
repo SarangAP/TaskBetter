@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './Components/Login/Login'
 import Home from './Components/Home/Home';
-import Nav from './Components/Nav/Nav';
+import TBNav from './Components/TBNav/TBNav';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ const LoginContainer = () => (
 // Default Container (Includes navigation bar)
 const DefaultContainer = ({ children }) => (
   <div>
-    <Nav/>
+    <TBNav/>
     {children}
   </div>
 );
