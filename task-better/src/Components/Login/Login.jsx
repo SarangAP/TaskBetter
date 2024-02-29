@@ -42,7 +42,7 @@ const Login = () => {
     return (
         <div className="wrapper">
             <form>
-                <h1>Login Here</h1>
+                <h1 className='loginHeader'>Login Here</h1>
                 <div className='input-box'>
                     <input
                         type="text"
