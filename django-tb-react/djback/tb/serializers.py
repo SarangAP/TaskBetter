@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from .models import *
 from django.contrib.auth.models import User
+
 class TaskSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
 

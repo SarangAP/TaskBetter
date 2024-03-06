@@ -29,9 +29,8 @@ class TaskView(APIView):
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # Stub - will eventually be used to create tasks
     def post(self, request):
-        serializer = TaskSerializer(request.data)
+        serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
