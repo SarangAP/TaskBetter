@@ -30,7 +30,7 @@ class TaskView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        serializer = TaskSerializer(data=request.data)
+        serializer = TaskSerializer(data=request.data, user=request.user)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
