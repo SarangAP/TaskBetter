@@ -3,20 +3,30 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 from django.http import JsonResponse
 from django.http import HttpResponse
-from django.db import connection
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json
 from django.contrib.auth import authenticate
-from django.contrib.auth import login
 from django.contrib.auth.models import User
 
 from .models import *
 from .serializers import *
+
+'''
+Just to create tokens for existing users. Delete after we all have tokens for our existing super users
+Only uncomment after running `python manage.py migrate authtoken`
+
+from rest_framework.authtoken.models import Token
+
+for user in User.objects.all():
+    Token.objects.get_or_create(user=user)
+
+'''
 
 # Create your views here.
 class TestView(APIView):
@@ -24,6 +34,9 @@ class TestView(APIView):
         return Response({'message' : 'test'}, status=status.HTTP_200_OK)
 
 class TaskView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         tasks = Task.objects.all()
         serializer = TaskSerializer(tasks, many=True)
@@ -33,42 +46,54 @@ class TaskView(APIView):
         serializer = TaskSerializer(data=request.data, user=request.user)
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@csrf_exempt
-def login_view(request):
-    if request.method == 'OPTIONS':
-        response = HttpResponse(status=204)
-        response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
-        response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'  
-        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response['Access-Control-Allow-Credentials'] = 'true'  
-        return response
-    
-    elif request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        username = data.get('username')
-        password = data.get('password')
-
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
         user = authenticate(request, username=username,password=password)
         if user is not None:
-            login(request, user)
-            response = JsonResponse({'message': 'Login successful'})
+            serializer = UserSerializer(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            response =  JsonResponse({'message': 'Invalid credentials testing'}, status=401)
-    else:
-       response =  JsonResponse({'message': 'Invalid method'}, status=405)
-      
-    response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
-    response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-    response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-    response['Access-Control-Allow-Credentials'] = 'true'
-    
-    return response
+            return Response({'message' : 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+#@csrf_exempt
+#def login_view(request):
+#    if request.method == 'OPTIONS':
+#        response = HttpResponse(status=204)
+#        response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+#        response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'  
+#        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+#        response['Access-Control-Allow-Credentials'] = 'true'  
+#        return response
+#    
+#    elif request.method == 'POST':
+#        data = json.loads(request.body.decode('utf-8'))
+#        username = data.get('username')
+#        password = data.get('password')
+#
+#        user = authenticate(request, username=username,password=password)
+#        if user is not None:
+#            login(request, user)
+#            response = JsonResponse({'message': 'Login successful'})
+#        else:
+#            response =  JsonResponse({'message': 'Invalid credentials testing'}, status=401)
+#    else:
+#       response =  JsonResponse({'message': 'Invalid method'}, status=405)
+#      
+#    response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+#    response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+#    response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+#    response['Access-Control-Allow-Credentials'] = 'true'
+#    
+#    return response
 
 class ProfileView(APIView):
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     @csrf_exempt
@@ -76,5 +101,6 @@ class ProfileView(APIView):
         user = request.user
         print(f'Who is trying to see: {user}')
         serializer = UserSerializer(user)
+
         return Response(serializer.data, status=status.HTTP_200_OK)
     
