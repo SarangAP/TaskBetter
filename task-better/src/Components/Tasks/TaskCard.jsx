@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Trash from "../icons/Trash";
+import Trash from "../icons/trash";
 import Caret from "../icons/Caret";
 import CheckBox from "../icons/CheckBox";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, handleDelete }) => {
   const [isRotated, setIsRotated] = useState(false);
   const [completed, setCompleted] = useState(false);
 
@@ -26,7 +26,7 @@ const TaskCard = ({ task }) => {
           <Caret isRotated={isRotated} handleDropDown={handleDropDown} />
         </div>
         <div className="col-sm-1">
-          <Trash />
+          <Trash handleDelete={handleDelete} task={task} />
         </div>
       </div>
 

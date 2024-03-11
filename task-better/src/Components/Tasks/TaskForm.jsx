@@ -14,7 +14,7 @@ const TaskForm = ({ addTask }) => {
     }
 
     // Temporary code for displaying created tasks in tasks view
-    addTask({ title, body: description });
+    addTask({ title, body: description,});
 
     fetch("http://127.0.0.1:8000/tasks/", {
       method: "POST",
