@@ -16,6 +16,9 @@ code {
   max-width: 100%;
   text-wrap: wrap;
 }
+.trash-hover:hover{
+  color:#e04943;
+  }
 
 .rotate {
   transform: rotate(-90deg);
