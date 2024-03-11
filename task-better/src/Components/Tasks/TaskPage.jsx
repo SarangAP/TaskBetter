@@ -18,14 +18,16 @@ const TaskPage = () => {
       }}
     >
       <div className="row m-4 mt-0 h-75">
-        <div className="col-md-4">
+        <div className="col-md-1"></div>
+        <div className="col-md-3">
           <h4 className="m-2">Create a Task</h4>
           <TaskForm addTask={addTask} />
         </div>
         <div className="col-md-3"></div>
-        <div className="col-md-5 mt-3">
+        <div className="col-md-4 mt-3">
           <TasksView tasks={tasks} />
         </div>
+        <div className="col-md-1"></div>
       </div>
     </div>
   );

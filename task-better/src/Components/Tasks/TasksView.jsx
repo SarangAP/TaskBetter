@@ -15,18 +15,20 @@ function TasksView({ tasks }) {
         height: "80vh",
       }}
     >
-      <div className="row m-2 d-inline-block">
-        {tasks.length === 0 ? (
+      {tasks.length === 0 ? (
+        <div className="row m-2 d-inline-block">
           <p>No tasks yet.</p>
-        ) : (
+        </div>
+      ) : (
+        <div className="row m-2 text-left">
           <ul>
             {tasks.map((task) => (
               <TaskCard task={task} />
               // <li key={task.id}>{task.title} - {task.description}</li>
             ))}
           </ul>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
