@@ -5,14 +5,19 @@ import CheckBox from "../icons/CheckBox";
 
 const TaskCard = ({ task }) => {
   const [isRotated, setIsRotated] = useState(false);
+  const [completed, setCompleted] = useState(false);
+
   const handleDropDown = () => {
     setIsRotated(!isRotated);
+  };
+  const handleComplete = () => {
+    setCompleted(!completed);
   };
   return (
     <div className="container task-card bg-light rounded-2 p-2 w-100 mb-3">
       <div className="row">
         <div className="col-sm-1">
-          <CheckBox />
+          <CheckBox handleComplete={handleComplete} isCompleted={completed} />
         </div>
         <div className="col-sm-8">
           <h5 className="text-truncate expand-on-hover">{task.title}</h5>
