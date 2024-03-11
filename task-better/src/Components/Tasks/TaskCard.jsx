@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Trash from "../icons/trash";
+import Trash from "../icons/Trash";
 import Caret from "../icons/Caret";
 import CheckBox from "../icons/CheckBox";
 
