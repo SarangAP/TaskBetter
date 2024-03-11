@@ -35,7 +35,7 @@ const TaskForm = ({addTask}) => {
   };
 
   return (
-    <div className="container-fluid h-100 pt-5 pb-5 pl-2 pr-2 rounded-4" style={{
+    <div className="container pt-5 pb-5 pl-2 pr-2 rounded-4 overflow-scroll text-center" style={{
       backgroundColor: "#A1D0D0",
     }}>
       <form onSubmit={handleSubmit}>
