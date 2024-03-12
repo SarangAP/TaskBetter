@@ -1,9 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa'; // Example icon from React Icons
-import './TBNav.css'
+import React, {useState} from "react";
+import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa"; // Example icon from React Icons
+import "./TBNav.css";
 
 const TBNav = () => {
+  const [showAccountMenu, setAccountMenu] = useState(false)
+  const handleProfileClick = ()=>{
+    setAccountMenu(true)
+  }
+  const closeAccountMenu = () => {
+    setAccountMenu(false)
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -33,38 +40,41 @@ const TBNav = () => {
                 Logout
               </Link>
             </li>
-            
-              <div class="dropdown">
-    <button class="dropbtn">Profile
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </div>
-   
-    <select name="" id=""> 
-        <option value="rigatoni">Rigatoni</option> 
-        <option value="dave">Dave</option> 
-        <option value="pumpernickel">Pumpernickel</option> 
-        <option value="reeses">Reeses</option> 
-    </select>
+            <li className="nav-item">
+              <label className="nav-link" onClick={handleProfileClick}>
+              Profile
+              </label>
+              { showAccountMenu ? (
+              
+              <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4 ">
+                <p onClick={closeAccountMenu}>Hello There</p>
+                <Link>This is an item</Link>
+                <Link>This is an item</Link>
+                <Link>This is an item</Link>
+                <Link>This is an item</Link>
+              </div>) : (<></>)
+              }
+            </li>
+
+            {/*<div className="dropdown">
+              <button className="dropbtn">
+                <Link className="">
+                Profile
+                </Link>
+                <i className="fa fa-caret-down"></i>
+              </button>
+              <div className="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>*/}
+
           </ul>
-          </div>
         </div>
-      </nav>
-            
-    
-    
-          
-            
-          
-        
+      </div>
+    </nav>
   );
 };
 
 export default TBNav;
-
-
