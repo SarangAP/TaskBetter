@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa'; // Example icon from React Icons
+import './TBNav.css'
 
 const TBNav = () => {
   return (
@@ -32,11 +33,35 @@ const TBNav = () => {
                 Logout
               </Link>
             </li>
-            {/* Add more menu items as needed */}
+            
+              <div class="dropdown">
+    <button class="dropbtn">Profile
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div>
+   
+    <select name="" id=""> 
+        <option value="rigatoni">Rigatoni</option> 
+        <option value="dave">Dave</option> 
+        <option value="pumpernickel">Pumpernickel</option> 
+        <option value="reeses">Reeses</option> 
+    </select>
           </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+            
+    
+    
+          
+            
+          
+        
   );
 };
 
