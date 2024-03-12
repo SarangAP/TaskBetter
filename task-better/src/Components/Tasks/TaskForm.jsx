@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TaskForm = ({addTask}) => {
+const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -14,7 +14,7 @@ const TaskForm = ({addTask}) => {
     }
 
     // Temporary code for displaying created tasks in tasks view
-    addTask({title, description});
+    addTask({ title, body: description,});
 
     fetch("http://127.0.0.1:8000/tasks/", {
       method: "POST",
@@ -35,9 +35,12 @@ const TaskForm = ({addTask}) => {
   };
 
   return (
-    <div className="container-fluid h-100 pt-5 pb-5 pl-2 pr-2 rounded-4" style={{
-      backgroundColor: "#A1D0D0",
-    }}>
+    <div
+      className="container pt-5 pb-5 pl-2 pr-2 rounded-4 overflow-scroll text-center"
+      style={{
+        backgroundColor: "#A1D0D0",
+      }}
+    >
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <input
