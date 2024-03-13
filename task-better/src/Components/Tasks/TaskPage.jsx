@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TaskForm from "./TaskForm";
 import TasksView from "./TasksView";
 
 const TaskPage = () => {
   const [tasks, setTasks] = useState([]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+     if (!user) {
+      console.log("NO USER");
+      setUser(JSON.parse(sessionStorage.getItem("user")));
+      console.log("USER FOUND", user);
+    }
+  }, []);
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
@@ -18,7 +28,7 @@ const TaskPage = () => {
   };
   // implement task update
   // such that when completed updates backend
-  const updateTask = (taskU) => {};
+  const updateTask = (taskU) => { };
 
   return (
     <div

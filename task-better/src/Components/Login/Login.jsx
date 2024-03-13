@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-const Login = ({ setUser }) => {
+const Login = ({ }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
-    useEffect(() => {
+  useEffect(() => {
     const sessionToken = sessionStorage.getItem("token");
     if (sessionToken) {
       // Session token exists, navigate to the home page
-      window.location.href ='/home'
+      window.location.href = "/home";
     }
     // Add other logic or cleanup if needed
   }, []);
@@ -35,13 +34,10 @@ const Login = ({ setUser }) => {
       if (response.ok) {
         console.log("Login successful", response);
         response.json().then((data) => {
-          setUser(data);
-          sessionStorage.setItem('token', data.token)
-          sessionStorage.setItem('user', JSON.stringify(data))
-          navigate("/home", {state:{currentUser:data}});
+          sessionStorage.setItem("token", data.token);
+          sessionStorage.setItem("user", JSON.stringify(data));
+          navigate("/home", { state: { currentUser: data } });
         });
-        //  setCurrentUser(username);
-        //setUser(response);
       } else {
         const data = await response.json();
         console.error(data.message);
