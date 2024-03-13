@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa'; // Example icon from React Icons
 
-const TBNav = () => {
+const TBNav = ({currentUser}) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
