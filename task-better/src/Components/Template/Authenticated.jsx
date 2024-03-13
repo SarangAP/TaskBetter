@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import TBNav from "../TBNav/TBNav";
 
 const Authenticated = ({ page }) => {

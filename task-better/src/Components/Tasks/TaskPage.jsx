@@ -13,7 +13,7 @@ const TaskPage = () => {
       setUser(JSON.parse(sessionStorage.getItem("user")));
       console.log("USER FOUND", user);
     }
-  }, []);
+  });
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);

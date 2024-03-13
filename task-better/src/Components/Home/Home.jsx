@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 const Home = ({ currentUser }) => {
   const [user, setUser] = useState(null)
@@ -9,7 +8,7 @@ const Home = ({ currentUser }) => {
       setUser(JSON.parse(sessionStorage.getItem("user")));
       console.log("USER FOUND", user);
     }
-  }, []);
+  });
   return (
     <div>
       {user ? (
