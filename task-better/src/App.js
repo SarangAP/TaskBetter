@@ -7,6 +7,7 @@ import TaskPage from './Components/Tasks/TaskPage';
 import Profile from './Components/Profile';
 import TBNav from './Components/TBNav/TBNav';
 
+
 function App() {
   return (
     <Router>
@@ -27,6 +28,9 @@ const LoginContainer = () => (
     <Login />
   </div>
 );
+
+
+
 
 // Default Container (Includes navigation bar)
 const DefaultContainer = ({ children }) => (

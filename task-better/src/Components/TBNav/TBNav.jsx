@@ -11,6 +11,12 @@ const TBNav = () => {
   const closeAccountMenu = () => {
     setAccountMenu(false)
   }
+  const logout = () => {
+    /*Need to add the back end request for logout if implemented*/ 
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    window.location.href = "/";
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -36,9 +42,9 @@ const TBNav = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/logout">
+              <label className="nav-link" onClick={logout}>
                 Logout
-              </Link>
+              </label>
             </li>
             <li className="nav-item">
               <label className="nav-link" onClick={handleProfileClick}>
