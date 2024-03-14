@@ -1,13 +1,34 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import TaskForm from "./TaskForm";
 import TasksView from "./TasksView";
 
 const TaskPage = () => {
   const [tasks, setTasks] = useState([]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+     if (!user) {
+      console.log("NO USER");
+      setUser(JSON.parse(sessionStorage.getItem("user")));
+      console.log("USER FOUND", user);
+    }
+  });
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
   };
+  const deleteTask = (taskD) => {
+    // temp code for deleting task, need to create post req to backend
+    // for full functionality
+    const updatedTasks = tasks.filter((task) => {
+      return task.title !== taskD.title || task.body !== taskD.body;
+    });
+    setTasks(updatedTasks);
+  };
+  // implement task update
+  // such that when completed updates backend
+  const updateTask = (taskU) => { };
 
   return (
     <div
@@ -17,20 +38,17 @@ const TaskPage = () => {
         fontFamily: "Lexend Exa, sans-serif",
       }}
     >
-      <div className="row p-5">
-        <div className="col">
-          <h1>Task Better</h1>
-        </div>
-      </div>
       <div className="row m-4 mt-0 h-75">
-        <div className="col-md-4">
-          <h4>Create a Task</h4>
-          <TaskForm addTask={addTask}/>
+        <div className="col-md-1"></div>
+        <div className="col-md-3">
+          <h4 className="m-2">Create a Task</h4>
+          <TaskForm addTask={addTask} />
         </div>
         <div className="col-md-3"></div>
-        <div className="col-md-5">
-          <TasksView tasks={tasks}/>
-          </div>
+        <div className="col-md-4 mt-3">
+          <TasksView tasks={tasks} handleDelete={deleteTask} />
+        </div>
+        <div className="col-md-1"></div>
       </div>
     </div>
   );

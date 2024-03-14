@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from .models import *
 from django.contrib.auth.models import User
+
 class TaskSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
 
@@ -11,6 +12,8 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ['task_id', 'title', 'description', 'created', 'modified', 'completed', 'username']
 
 class UserSerializer(serializers.ModelSerializer):
+    token = serializers.ReadOnlyField(source='auth_token.key')
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'date_joined', 'last_login']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'date_joined', 'last_login', 'token']
+

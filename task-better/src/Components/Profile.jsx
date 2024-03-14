@@ -12,6 +12,7 @@ const Profile = () => {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token '+sessionStorage.getItem('token')
             },
         });
 
