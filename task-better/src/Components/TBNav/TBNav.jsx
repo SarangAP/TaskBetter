@@ -1,8 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa'; // Example icon from React Icons
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa"; // Example icon from React Icons
+import "./TBNav.css";
 
-const TBNav = ({currentUser}) => {
+const TBNav = () => {
+  const [showAccountMenu, setAccountMenu] = useState(false);
+  const handleProfileClick = () => {
+    setAccountMenu(true);
+  };
+  const closeAccountMenu = () => {
+    setAccountMenu(false);
+  };
+  const logout = () => {
+    /*Need to add the back end request for logout if implemented*/
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    window.location.href = "/";
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -23,16 +37,43 @@ const TBNav = ({currentUser}) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/Home">
+              <Link className="nav-link" to="/home">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/logout">
-                Logout
+              <Link className="nav-link" to="/profile">
+                Profile
               </Link>
             </li>
-            {/* Add more menu items as needed */}
+            <li className="nav-item">
+              <label className="nav-link" onClick={handleProfileClick}>
+                Quick Dropdown
+              </label>
+              {showAccountMenu ? (
+                <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4 ">
+                  <p onClick={closeAccountMenu}>Click to Close</p>
+                  <label className="nav-link" onClick={logout}>
+                    Logout
+                  </label>
+                </div>
+              ) : (
+                <></>
+              )}
+            </li>
+            {/*<div className="dropdown">
+              <button className="dropbtn">
+                <Link className="">
+                Profile
+                </Link>
+                <i className="fa fa-caret-down"></i>
+              </button>
+              <div className="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>*/}
           </ul>
         </div>
       </div>
@@ -41,5 +82,3 @@ const TBNav = ({currentUser}) => {
 };
 
 export default TBNav;
-
-

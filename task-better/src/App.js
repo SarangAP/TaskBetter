@@ -8,6 +8,7 @@ import Profile from "./Components/Profile";
 import Authenticated from "./Components/Template/Authenticated";
 import Register from "./Components/Register/Register"
 
+
 function App() {
   return (
     <Router>
