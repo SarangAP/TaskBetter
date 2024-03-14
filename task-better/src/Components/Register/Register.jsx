@@ -11,6 +11,8 @@ const Register = () => {
     password: '',
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -35,9 +37,27 @@ const Register = () => {
         navigate('/');
       } else { 
         console.error('Registration failed somewhere');
+        setErrorMessage('Something went wrong registering try again');
+        //clearing form fields if issue registering
+        setFormData({
+          username: '',
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+        });
       }
     } catch (error) {
       console.error('Error during registration process:', error);
+      setErrorMessage('Something went wrong registering try again');
+             //clearing form fields if issue registering
+             setFormData({
+              username: '',
+              firstName: '',
+              lastName: '',
+              email: '',
+              password: '',
+            });
     }
   };
 
@@ -101,6 +121,10 @@ const Register = () => {
       <br />
 
       <button type="submit">Register</button>
+
+      <br />
+      <br />
+      {errorMessage}
     </form>
   );
 };
