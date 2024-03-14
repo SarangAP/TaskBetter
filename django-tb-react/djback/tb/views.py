@@ -99,13 +99,6 @@ class ProfileView(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-#class LogoutView(APIView):
-#    def post(self, request):
-#        try:
-#            request.user.auth_token.delete()
-#            return Response({'message': 'Logout was successful'}, status=status.HTTP_200_OK)
-#        except Exception as event:
-#            return Response({'error': event}, status=status.HTTP_400_BAD_REQUEST)
 class LogoutView(APIView):
     def post(self, request):
         # Get the token from the Authorization header
