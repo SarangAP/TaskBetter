@@ -3,7 +3,8 @@ import TBNav from "../TBNav/TBNav";
 
 const Authenticated = ({ page }) => {
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
+    const token = sessionStorage.getItem("token")
+    if (token && token != null) {
       console.log("Session Token", sessionStorage.getItem("token"));
     } else {
       if (window.location.pathname !== "/") {

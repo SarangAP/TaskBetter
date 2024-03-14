@@ -11,11 +11,32 @@ const TBNav = () => {
   const closeAccountMenu = () => {
     setAccountMenu(false);
   };
-  const logout = () => {
+  const logout = async () => {
     /*Need to add the back end request for logout if implemented*/
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
-    window.location.href = "/";
+    try {
+      const response = await fetch("http://localhost:8000/logout/", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Token ' + sessionStorage.getItem('token')
+        },
+      });
+      if (response.ok) {
+        console.log("Logout successful", response);
+        response.json().then((data) => {
+          sessionStorage.removeItem("token");
+          sessionStorage.removeItem("user");
+          window.location.href = "/";
+        });
+      } else {
+        const data = await response.json();
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
