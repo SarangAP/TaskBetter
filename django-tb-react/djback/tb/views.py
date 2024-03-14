@@ -61,6 +61,43 @@ class LoginView(APIView):
         else:
             return Response({'message' : 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
+class RegisterView(APIView):
+    @csrf_exempt 
+    def post(self, request):
+        data = json.loads(request.body.decode('utf-8'))
+        username = data.get('username', '')
+        first_name = data.get('firstName', '')
+        last_name = data.get('lastName', '')
+        email = data.get('email', '')
+        password = data.get('password', '')
+
+        try:
+            if User.objects.filter(username = username).exists():
+                return Response({'message': 'Choose a different username'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            elif User.objects.filter(email = email).exists():
+                return Response({'message': 'Email is in use already'}, status=status.HTTP_400_BAD_REQUEST)
+                
+            user = User.objects.create_user(username = username, first_name = first_name, last_name = last_name, email = email, password = password)
+
+            return Response({'message': 'Registration was successful!'}, status=status.HTTP_201_CREATED)
+        
+        except Exception as event:
+            return Response({'message': f'Registration failed: {str(event)}'}, status=status.HTTP_400_BAD_REQUEST)
+        
+class ProfileView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    @csrf_exempt
+    def get(self, request):
+        user = request.user
+        print(f'Who is trying to see: {user}')
+        serializer = UserSerializer(user)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
 #@csrf_exempt
 #def login_view(request):
 #    if request.method == 'OPTIONS':
@@ -91,16 +128,3 @@ class LoginView(APIView):
 #    response['Access-Control-Allow-Credentials'] = 'true'
 #    
 #    return response
-
-class ProfileView(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    @csrf_exempt
-    def get(self, request):
-        user = request.user
-        print(f'Who is trying to see: {user}')
-        serializer = UserSerializer(user)
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    
