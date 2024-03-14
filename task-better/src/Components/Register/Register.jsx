@@ -21,7 +21,7 @@ const Register = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/register/', { //does not work yet just placeholder
+      const response = await fetch('http://127.0.0.1:8000/register/', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const Register = () => {
       });
 
       if (response.ok) {
-        console.log('Registration was successfull successful');
+        console.log('Registration was successful');
       } else { 
         console.error('Registration failed somewhere');
       }
@@ -41,7 +41,7 @@ const Register = () => {
 
   return (
     <form onSubmit={handleRegistration}>
-    <label> Enter your information below</label>
+    <label>Enter your information below</label>
     <br />
       <label>
         Username:
