@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     firstName: '',
@@ -31,6 +32,7 @@ const Register = () => {
 
       if (response.ok) {
         console.log('Registration was successful');
+        navigate('/');
       } else { 
         console.error('Registration failed somewhere');
       }
