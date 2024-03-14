@@ -1,22 +1,22 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa"; // Example icon from React Icons
 import "./TBNav.css";
 
 const TBNav = () => {
-  const [showAccountMenu, setAccountMenu] = useState(false)
-  const handleProfileClick = ()=>{
-    setAccountMenu(true)
-  }
+  const [showAccountMenu, setAccountMenu] = useState(false);
+  const handleProfileClick = () => {
+    setAccountMenu(true);
+  };
   const closeAccountMenu = () => {
-    setAccountMenu(false)
-  }
+    setAccountMenu(false);
+  };
   const logout = () => {
-    /*Need to add the back end request for logout if implemented*/ 
+    /*Need to add the back end request for logout if implemented*/
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
     window.location.href = "/";
-  }
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -37,31 +37,30 @@ const TBNav = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/Home">
+              <Link className="nav-link" to="/home">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <label className="nav-link" onClick={logout}>
-                Logout
-              </label>
+              <Link className="nav-link" to="/profile">
+                Profile
+              </Link>
             </li>
             <li className="nav-item">
               <label className="nav-link" onClick={handleProfileClick}>
-              Profile
+                Quick Dropdown
               </label>
-              { showAccountMenu ? (
-              
-              <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4 ">
-                <p onClick={closeAccountMenu}>Hello There</p>
-                <Link>This is an item</Link>
-                <Link>This is an item</Link>
-                <Link>This is an item</Link>
-                <Link>This is an item</Link>
-              </div>) : (<></>)
-              }
+              {showAccountMenu ? (
+                <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4 ">
+                  <p onClick={closeAccountMenu}>Click to Close</p>
+                  <label className="nav-link" onClick={logout}>
+                    Logout
+                  </label>
+                </div>
+              ) : (
+                <></>
+              )}
             </li>
-
             {/*<div className="dropdown">
               <button className="dropbtn">
                 <Link className="">
@@ -75,7 +74,6 @@ const TBNav = () => {
                 <a href="#">Link 3</a>
               </div>
             </div>*/}
-
           </ul>
         </div>
       </div>
