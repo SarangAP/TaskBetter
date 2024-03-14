@@ -1,0 +1,15 @@
+body {
+    background-color: lightblue;
+  }
+.input-box{
+    
+    text-align: center;
+}
+.submit-button{
+    text-align:center;
+    border: none;
+    padding: 10px 15px;
+}
+.loginHeader{
+    text-align: center;
+}
