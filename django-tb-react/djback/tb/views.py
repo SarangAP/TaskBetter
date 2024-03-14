@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 from .models import *
 from .serializers import *
 
+from rest_framework.authtoken.models import Token
 '''
 Just to create tokens for existing users. Delete after we all have tokens for our existing super users
 Only uncomment after running `python manage.py migrate authtoken`
@@ -55,6 +56,7 @@ class LoginView(APIView):
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(request, username=username,password=password)
+        Token.objects.get_or_create(user=user)
         if user is not None:
             serializer = UserSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -97,13 +99,29 @@ class ProfileView(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+#class LogoutView(APIView):
+#    def post(self, request):
+#        try:
+#            request.user.auth_token.delete()
+#            return Response({'message': 'Logout was successful'}, status=status.HTTP_200_OK)
+#        except Exception as event:
+#            return Response({'error': event}, status=status.HTTP_400_BAD_REQUEST)
 class LogoutView(APIView):
     def post(self, request):
-        try:
-            request.user.auth_token.delete()
-            return Response({'message': 'Logout was successful'}, status=status.HTTP_200_OK)
-        except Exception as event:
-            return Response({'error': 'Issue logging out'}, status=status.HTTP_400_BAD_REQUEST)
+        # Get the token from the Authorization header
+        auth_header = request.META.get('HTTP_AUTHORIZATION')
+        if auth_header and auth_header.startswith('Token '):
+            token = auth_header.split(' ')[1]
+            try:
+                # Retrieve the user associated with the token
+                user = Token.objects.get(key=token).user
+                # Delete the token
+                Token.objects.get(key=token).delete()
+                return Response({'message': 'Logout was successful'}, status=status.HTTP_200_OK)
+            except Token.DoesNotExist:
+                return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
 
 #@csrf_exempt
 #def login_view(request):
