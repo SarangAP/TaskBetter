@@ -42,7 +42,7 @@ const TBNav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/home">
           <img src={TaskBetter_Image} alt="TaskBetter Logo" />
         </Link>
         <button
