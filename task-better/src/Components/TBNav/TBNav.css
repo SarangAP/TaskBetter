@@ -40,3 +40,8 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }*/
+.navbar-brand img {
+  width: 150px;
+  height: 75px;
+  object-fit: contain;
+}
