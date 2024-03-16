@@ -16,10 +16,24 @@ const TaskForm = ({ addTask }) => {
     // Temporary code for displaying created tasks in tasks view
     addTask({ title, body: description,});
 
+    /*
+     const response = await fetch('http://localhost:8000/profile/', {
+          method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token '+sessionStorage.getItem('token')
+            },
+        });
+
+        */
+       
     fetch("http://127.0.0.1:8000/tasks/", {
       method: "POST",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
+        'Authorization': 'Token '+sessionStorage.getItem('token')
       },
       body: JSON.stringify({ title, description }),
     })
