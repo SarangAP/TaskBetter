@@ -21,13 +21,13 @@ from rest_framework.authtoken.models import Token
 '''
 Just to create tokens for existing users. Delete after we all have tokens for our existing super users
 Only uncomment after running `python manage.py migrate authtoken`
-
+'''
 from rest_framework.authtoken.models import Token
 
 for user in User.objects.all():
     Token.objects.get_or_create(user=user)
 
-'''
+
 
 # Create your views here.
 class TestView(APIView):
