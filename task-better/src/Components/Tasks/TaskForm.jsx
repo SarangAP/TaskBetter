@@ -1,8 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
+  useEffect(() => {
+    console.log("Current user is: ", currentUser.username);
+  }, [currentUser]);
+  
+  //Using profile view to retrieve username of current logged in user
+  const getUserProfile = () => {
+    fetch("http://127.0.0.1:8000/profile/", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + sessionStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCurrentUser(data);
+        console.log(currentUser.username);
+      })
+      .catch((error) => {
+        console.error("Error getting user info:", error);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,17 +45,6 @@ const TaskForm = ({ addTask }) => {
     // Temporary code for displaying created tasks in tasks view
     addTask({ title, body: description,});
 
-    /*
-     const response = await fetch('http://localhost:8000/profile/', {
-          method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token '+sessionStorage.getItem('token')
-            },
-        });
-
-        */
        
     fetch("http://127.0.0.1:8000/tasks/", {
       method: "POST",
@@ -35,7 +53,7 @@ const TaskForm = ({ addTask }) => {
         "Content-Type": "application/json",
         'Authorization': 'Token '+sessionStorage.getItem('token')
       },
-      body: JSON.stringify({ title, description }),
+      body: JSON.stringify({ title, description, user: currentUser.username }),
     })
       .then((response) => response.json())
       .then((data) => {
