@@ -20,10 +20,6 @@ from .serializers import *
 from rest_framework.authtoken.models import Token
 
 # Create your views here.
-class TestView(APIView):
-    def get(self, request):
-        return Response({'message' : 'test'}, status=status.HTTP_200_OK)
-
 class TaskView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -105,34 +101,3 @@ class LogoutView(APIView):
                 return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-#@csrf_exempt
-#def login_view(request):
-#    if request.method == 'OPTIONS':
-#        response = HttpResponse(status=204)
-#        response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
-#        response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'  
-#        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-#        response['Access-Control-Allow-Credentials'] = 'true'  
-#        return response
-#    
-#    elif request.method == 'POST':
-#        data = json.loads(request.body.decode('utf-8'))
-#        username = data.get('username')
-#        password = data.get('password')
-#
-#        user = authenticate(request, username=username,password=password)
-#        if user is not None:
-#            login(request, user)
-#            response = JsonResponse({'message': 'Login successful'})
-#        else:
-#            response =  JsonResponse({'message': 'Invalid credentials testing'}, status=401)
-#    else:
-#       response =  JsonResponse({'message': 'Invalid method'}, status=405)
-#      
-#    response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
-#    response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-#    response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-#    response['Access-Control-Allow-Credentials'] = 'true'
-#    
-#    return response

@@ -21,7 +21,6 @@ from tb.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', TestView.as_view(), name='test'),
     path('login/', LoginView.as_view(), name='login'),
     path('tasks/', TaskView.as_view(), name='tasks'),
     path('profile/', ProfileView.as_view(), name='profile_view'),
