@@ -1,23 +1,25 @@
-from django.shortcuts import render
+import json
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
 
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 from django.utils.decorators import method_decorator
-import json
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 from .models import *
 from .serializers import *
 
-from rest_framework.authtoken.models import Token
 
 # Create your views here.
 class TaskView(APIView):
@@ -36,6 +38,45 @@ class TaskView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, task_id):
+        task = get_object_or_404(Task, task_id=task_id)
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
+        task.delete()
+        return Response(status=status.HTTP_200_OK)
+
+class CompleteTaskView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, task_id):
+        task = get_object_or_404(Task, task_id=task_id)
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            serializer = TaskSerializer(task, data={'completed' : timezone.now()}, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UpdateTaskView(ApiView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, task_id):
+        task = get_object_or_404(Task, task_id=task_id)
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            serializer = TaskSerializer(task, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     def post(self, request):

@@ -16,6 +16,10 @@ class Task(models.Model):
     modified = models.DateTimeField(default=timezone.now)
     completed = models.DateTimeField(null=True)
 
+    def save(self, *args, **kwargs):
+        self.modified = timezone.now()
+        super(Task, self).save(*args, **kwargs)
+
     class Meta:
         managed = True
         db_table = 'task'
