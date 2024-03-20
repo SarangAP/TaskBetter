@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = ({ }) => {
@@ -8,6 +8,7 @@ const Login = ({ }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    
     const sessionToken = sessionStorage.getItem("token");
     if (sessionToken) {
       // Session token exists, navigate to the home page
@@ -48,6 +49,7 @@ const Login = ({ }) => {
   };
 
   return (
+    
     <div className="wrapper">
       <form>
         <h1 className="loginHeader">Login Here</h1>
@@ -74,6 +76,12 @@ const Login = ({ }) => {
           <button type="button" onClick={handleLogin}>
             Log in
           </button>
+        </div>
+
+        <div className="submit-button">Don't have an account?...
+          <Link type="button" to='/register'>
+            Register Here
+          </Link>
         </div>
       </form>
     </div>

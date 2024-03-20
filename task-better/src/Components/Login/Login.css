@@ -1,8 +1,8 @@
-body {
+
+.wrapper{
     background-color: lightblue;
-  }
+}
 .input-box{
-    
     text-align: center;
 }
 .submit-button{
@@ -10,6 +10,7 @@ body {
     border: none;
     padding: 10px 15px;
 }
+
 .loginHeader{
     text-align: center;
 }
