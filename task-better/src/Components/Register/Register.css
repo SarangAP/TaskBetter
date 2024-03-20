@@ -1,0 +1,8 @@
+.centered-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: fit-content;
+    background-color: lightblue;
+  }

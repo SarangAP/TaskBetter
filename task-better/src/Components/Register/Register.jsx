@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./Register.css";
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -62,7 +62,7 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={handleRegistration}>
+    <form className = "centered-items" onSubmit={handleRegistration}>
     <label>Enter your information below</label>
     <br />
       <label>
