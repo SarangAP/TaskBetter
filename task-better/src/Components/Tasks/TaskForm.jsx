@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [completed, setCompleted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,41 +12,29 @@ const TaskForm = ({ addTask }) => {
     if (title.trim() === "" || description.trim() === "") {
       console.log("Title and description cannot be empty");
       // return;
-    }
-
-    // Temporary code for displaying created tasks in tasks view
-    addTask({ title, body: description,});
-
-    /*
-     const response = await fetch('http://localhost:8000/profile/', {
-          method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token '+sessionStorage.getItem('token')
-            },
-        });
-
-        */
-       
-    fetch("http://127.0.0.1:8000/tasks/", {
-      method: "POST",
-      credentials: 'include',
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': 'Token '+sessionStorage.getItem('token')
-      },
-      body: JSON.stringify({ title, description }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the response data
-        console.log(data);
+    } else {
+      fetch("http://127.0.0.1:8000/tasks/", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Token " + sessionStorage.getItem("token"),
+        },
+        body: JSON.stringify({ title, description, completed }),
       })
-      .catch((error) => {
-        // Handle any errors
-        console.error(error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response data
+          console.log(data);
+          if (Array.isArray(data.title) || Array.isArray(data.description))
+            throw new Error("Invalid title or description");
+          addTask({ title, description, completed });
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error(error);
+        });
+    }
   };
 
   return (
