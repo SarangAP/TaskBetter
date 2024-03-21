@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./Home.css";
 
 const Home = ({ currentUser }) => {
   const [user, setUser] = useState(null)
