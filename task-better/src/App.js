@@ -4,7 +4,7 @@ import "./App.css";
 import Login from "./Components/Login/Login";
 import Home from "./Components/Home/Home";
 import TaskPage from "./Components/Tasks/TaskPage";
-import Profile from "./Components/Profile";
+import Profile from "./Components/Profile/Profile";
 import Authenticated from "./Components/Template/Authenticated";
 import Register from "./Components/Register/Register"
 
