@@ -6,3 +6,15 @@
     width: fit-content;
     background-color: lightblue;
   }
+  .register-header{
+    text-align: center;
+    position: relative;
+    top: 22px;
+}
+.errorMessage{
+  text-align: center;
+  position: relative;
+}
+.input-boxes{
+  margin-left: 8px;
+}
