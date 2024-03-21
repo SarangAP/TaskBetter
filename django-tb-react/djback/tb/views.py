@@ -60,12 +60,26 @@ class TaskView(APIView):
         except Task.DoesNotExist:
             return Response({"error": "Task not found"}, status=status.HTTP_404_NOT_FOUND)
 
+        if 'delete' in request.data and request.data['delete']:
+            print('deleting task')
+            task.delete()  # Delete the task
+            return Response(status=status.HTTP_204_NO_CONTENT)
+            
         serializer = TaskSerializer(task, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request):
+        print(request)
+        try:
+            task = Task.objects.get(task_id=request.data['task_id'], user_id=request.user.id)
+        except Task.DoesNotExist:
+            return Response({"error": "Task not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        task.delete()  # Delete the task
 
 class LoginView(APIView):
     def post(self, request):

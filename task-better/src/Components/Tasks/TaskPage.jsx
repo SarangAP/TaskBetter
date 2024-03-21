@@ -7,25 +7,25 @@ const TaskPage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchTasksOnLoad = async () => {
-      fetch("http://127.0.0.1:8000/tasks/", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Token " + sessionStorage.getItem("token"),
-        },
+  const fetchTasksOnLoad = async () => {
+    fetch("http://127.0.0.1:8000/tasks/", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + sessionStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Getting data", data);
+        setTasks([...data])
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Getting data", data);
-          setTasks([...data])
-        })
-        .catch((error) => {
-          console.log("Error gettign data", error);
-        });
-    };
+      .catch((error) => {
+        console.log("Error gettign data", error);
+      });
+  };
+  useEffect(() => {
     fetchTasksOnLoad()
   }, []);
 
@@ -45,11 +45,26 @@ const TaskPage = () => {
   const deleteTask = (taskD) => {
     // temp code for deleting task, need to create post req to backend
     // for full functionality
-    const updatedTasks = tasks.filter((task) => {
-      return task.title !== taskD.title || task.body !== taskD.body;
-    });
-    setTasks(updatedTasks);
+    taskD.delete = true
+    fetch("http://127.0.0.1:8000/tasks/", {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + sessionStorage.getItem("token"),
+      },
+      body: JSON.stringify(taskD)
+    }).then(response => response.json())
+      .then(data => {
+        console.log("Task Deleted", data)
+      })
+      .catch(error => {
+        console.log("Error deleting task", error)
+      })
+    const updatedTasks = tasks.filter(task => task.task_id != taskD.task_id)
+    setTasks(updatedTasks)
   };
+
   // implment task update/tasks
   // such that when completed updates backend
   const updateTask = (taskU) => {
