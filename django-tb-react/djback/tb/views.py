@@ -43,10 +43,9 @@ class TaskView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
-        try:
-            task = Task.objects.get(task_id=request.data['task_id'], user_id=request.user.id)
-        except Task.DoesNotExist:
-            return Response({"error": "Task not found"}, status=status.HTTP_404_NOT_FOUND)
+        task = get_object_or_404(task_id=request.data['task_id'])
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
             
         serializer = TaskSerializer(task, data=request.data, partial=True)
         if serializer.is_valid():
@@ -55,8 +54,8 @@ class TaskView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, task_id):
-        task = get_object_or_404(Task, task_id=task_id)
+    def delete(self, request):
+        task = get_object_or_404(Task, task_id=request.data['task_id'])
         if request.user != task.user:
             return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
         task.delete()
