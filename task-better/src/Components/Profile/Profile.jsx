@@ -38,7 +38,7 @@ const Profile = () => {
 
   return (
     <div>
-      <div className="welcome"><h2>Welcome to your Profile Page {user.username}</h2></div>
+      <div className="welcome"><h2>Welcome to your Profile Page</h2></div>
       {loading ? (
         <p>Loading profile info now</p> //sometimes doesn't load immediately
       ) : user ? (
