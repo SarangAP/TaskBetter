@@ -6,14 +6,38 @@ const TaskPage = () => {
   const [tasks, setTasks] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
-     if (!user) {
+    const fetchTasksOnLoad = async () => {
+      fetch("http://127.0.0.1:8000/tasks/", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Token " + sessionStorage.getItem("token"),
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Getting data", data);
+          setTasks([...tasks, ...data])
+        })
+        .catch((error) => {
+          console.log("Error gettign data", error);
+        });
+    };
+    fetchTasksOnLoad()
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
       console.log("NO USER");
       setUser(JSON.parse(sessionStorage.getItem("user")));
       console.log("USER FOUND", user);
     }
   });
+
+  useEffect(()=>{console.log(tasks)},[tasks])
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);

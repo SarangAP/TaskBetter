@@ -41,6 +41,8 @@ const TaskForm = ({ addTask }) => {
       .then((data) => {
         // Handle the response data
         console.log(data);
+        if(Array.isArray(data.title) || Array.isArray(data.description))
+          throw new Error("Invalid title or description")
         addTask({ title, body: description, completed});
       })
       .catch((error) => {

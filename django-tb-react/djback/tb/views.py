@@ -53,7 +53,7 @@ class TaskView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print(serializer.errors)
-            return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     def post(self, request):
