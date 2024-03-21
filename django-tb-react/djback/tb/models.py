@@ -14,7 +14,7 @@ class Task(models.Model):
     description = models.CharField(max_length=256) 
     created = models.DateTimeField(default=timezone.now)
     modified = models.DateTimeField(default=timezone.now)
-    completed = models.DateTimeField(null=True)
+    completed = models.BooleanField(default=False)
 
     class Meta:
         managed = True

@@ -44,12 +44,16 @@ class TaskView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        serializer = TaskSerializer(data=request.data, user=request.user)
+        req_data = request.data.copy()
+        req_data['user'] = request.user.id
+        serializer = TaskSerializer(data=req_data)
+        print("-------------------",serializer)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            print(serializer.errors)
+            return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     def post(self, request):

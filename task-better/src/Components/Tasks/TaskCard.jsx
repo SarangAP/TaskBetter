@@ -5,7 +5,7 @@ import CheckBox from "../icons/CheckBox";
 
 const TaskCard = ({ task, handleDelete }) => {
   const [isRotated, setIsRotated] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(task.completed);
 
   const handleDropDown = () => {
     setIsRotated(!isRotated);

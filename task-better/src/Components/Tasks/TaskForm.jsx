@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [completed, setCompleted] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +15,6 @@ const TaskForm = ({ addTask }) => {
     }
 
     // Temporary code for displaying created tasks in tasks view
-    addTask({ title, body: description,});
 
     /*
      const response = await fetch('http://localhost:8000/profile/', {
@@ -35,12 +35,13 @@ const TaskForm = ({ addTask }) => {
         "Content-Type": "application/json",
         'Authorization': 'Token '+sessionStorage.getItem('token')
       },
-      body: JSON.stringify({ title, description }),
+      body: JSON.stringify({ title, description, completed }),
     })
       .then((response) => response.json())
       .then((data) => {
         // Handle the response data
         console.log(data);
+        addTask({ title, body: description, completed});
       })
       .catch((error) => {
         // Handle any errors
