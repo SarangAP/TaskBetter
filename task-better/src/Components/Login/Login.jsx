@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link} from "react-router-dom";
 import "./Login.css";
+import TaskBetter_Image from "../TBNav/TaskBetterLogo.svg"
 
 const Login = ({ }) => {
   const [username, setUsername] = useState("");
@@ -48,7 +49,10 @@ const Login = ({ }) => {
   };
 
   return (
+    
     <div className="wrapper">
+    <div className="login-logo">
+      <img src={TaskBetter_Image} alt="TaskBetter Logo" /> </div>
       <form>
         <h1 className="loginHeader">Login Here</h1>
         <div className="input-box">

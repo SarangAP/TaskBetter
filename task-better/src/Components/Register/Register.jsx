@@ -63,7 +63,9 @@ const Register = () => {
 
   return (
     <form className = "centered-items" onSubmit={handleRegistration}>
-    <label>Enter your information below</label>
+    <div>
+    <h1 className="register-header">Register Here</h1>
+    </div>
     <br />
       <label>
         Username:
@@ -72,6 +74,7 @@ const Register = () => {
           name="username"
           value={formData.username}
           onChange={handleChange}
+          style={{ marginLeft: '12px' }}
         />
       </label>
       <br />
@@ -83,6 +86,7 @@ const Register = () => {
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
+          style={{ marginLeft: '8px' }}
         />
       </label>
       <br />
@@ -94,6 +98,7 @@ const Register = () => {
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
+          style={{ marginLeft: '8px' }}
         />
       </label>
       <br />
@@ -105,6 +110,7 @@ const Register = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
+          style={{ marginLeft: '41px' }}
         />
       </label>
       <br />
@@ -116,6 +122,7 @@ const Register = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
+          style={{ marginLeft: '10px' }}
         />
       </label>
       <br />
@@ -124,7 +131,9 @@ const Register = () => {
 
       <br />
       <br />
+      <div classname="errorMessage">
       {errorMessage}
+      </div>
     </form>
   );
 };

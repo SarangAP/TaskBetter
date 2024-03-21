@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./Profile.css";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -37,17 +38,17 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>Welcome to your Profile Page</h2>
+      <div className="welcome"><h2>Welcome to your Profile Page {user.username}</h2></div>
       {loading ? (
         <p>Loading profile info now</p> //sometimes doesn't load immediately
       ) : user ? (
-        <div>
-          <p>User ID: {user.id}</p>
-          <p>Username: {user.username}</p>
-          <p>First Name: {user.first_name}</p>
-          <p>Last Name: {user.last_name}</p>
-          <p>Email: {user.email}</p>
-          <p>Date joined: {user.date_joined}</p>
+        <div className = "user-info">
+          <p><b>User ID: </b> {user.id}</p>
+          <p><b>Username: </b>{user.username}</p>
+          <p><b>First Name: </b>{user.first_name}</p>
+          <p><b>Last Name: </b>{user.last_name}</p>
+          <p><b>Email: </b>{user.email}</p>
+          <p><b>Date joined:</b> {user.date_joined}</p>
         </div>
       ) : (
         <p>Error loading profile</p>
