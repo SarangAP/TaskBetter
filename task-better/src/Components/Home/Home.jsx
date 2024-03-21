@@ -14,8 +14,12 @@ const Home = ({ currentUser }) => {
     <div>
       {user ? (
         <>
-          <h1>Welcome {user.username} to Task Better</h1>
-          <p>This will serve as our homepage/dashboard</p>
+          <div className="welcome">
+            <h1>Welcome {user.username} to Task Better</h1>
+            </div>
+            <div className="text-content">
+          <p>This will serve as our homepage/dashboard, this is where we will have info talking about our product, modify this text here</p>
+          </div>
         </>
       ) : (
         <></>

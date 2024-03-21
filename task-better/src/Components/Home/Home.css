@@ -6,3 +6,14 @@
     width: fit-content;
     background-color: lightblue;
   }
+
+  .welcome{
+    text-align: center;
+    position: relative;
+    top: 25px;
+  }
+  .text-content{
+    text-align: center;
+    position: relative;
+    top: 125px;
+  }
