@@ -9,7 +9,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ['task_id', 'title', 'description', 'created', 'modified', 'completed', 'username']
+        fields = ['task_id', 'title', 'description', 'created', 'modified', 'completed', 'user','username']
 
 class UserSerializer(serializers.ModelSerializer):
     token = serializers.ReadOnlyField(source='auth_token.key')

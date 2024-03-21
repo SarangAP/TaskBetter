@@ -5,7 +5,7 @@ import CheckBox from "../icons/CheckBox";
 
 const TaskCard = ({ task, handleDelete }) => {
   const [isRotated, setIsRotated] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(task.completed);
 
   const handleDropDown = () => {
     setIsRotated(!isRotated);
@@ -33,7 +33,7 @@ const TaskCard = ({ task, handleDelete }) => {
       {isRotated ? (
         <div className={`row ${isRotated ? "visible" : "invisible"}`}>
           <div className="col-sm text-start ms-1">
-            <p>{task.body}</p>
+            <p>{task.description}</p>
           </div>
         </div>
       ) : (
