@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TaskCard from "./TaskCard";
 
-function TasksView({ tasks, handleDelete }) {
+function TasksView({ tasks, handleDelete, handleUpdate }) {
   // const [tasks, setTasks] = useState([]);
 
   // const addTask = (task) => {
@@ -42,7 +42,7 @@ function TasksView({ tasks, handleDelete }) {
         <div className="row m-2 text-left">
           <ul>
             {tasks.map((task) => (
-              <TaskCard task={task} handleDelete={handleDelete} />
+              <TaskCard task={task} handleDelete={handleDelete} handleUpdate={handleUpdate} />
               // <li key={task.id}>{task.title} - {task.description}</li>
             ))}
           </ul>
