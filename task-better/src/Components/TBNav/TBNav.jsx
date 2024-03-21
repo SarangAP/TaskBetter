@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa"; // Example icon from React Icons
 import "./TBNav.css";
+import TaskBetter_Image from "./TaskBetterLogo.svg"
 
 const TBNav = () => {
   const [showAccountMenu, setAccountMenu] = useState(false);
@@ -41,8 +42,8 @@ const TBNav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link className="navbar-brand" to="/">
-          TaskBetter
+        <Link className="navbar-brand" to="/home">
+          <img src={TaskBetter_Image} alt="TaskBetter Logo" />
         </Link>
         <button
           className="navbar-toggler"
@@ -63,13 +64,18 @@ const TBNav = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/tasks">
+                Tasks
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/profile">
                 Profile
               </Link>
             </li>
             <li className="nav-item">
               <label className="nav-link" onClick={handleProfileClick}>
-                Quick Dropdown
+                More
               </label>
               {showAccountMenu ? (
                 <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4 ">
