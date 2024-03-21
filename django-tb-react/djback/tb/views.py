@@ -1,39 +1,27 @@
-from django.shortcuts import render
+import json
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
 
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 from django.utils.decorators import method_decorator
-import json
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 from .models import *
 from .serializers import *
 
-from rest_framework.authtoken.models import Token
-'''
-Just to create tokens for existing users. Delete after we all have tokens for our existing super users
-Only uncomment after running `python manage.py migrate authtoken`
-'''
-from rest_framework.authtoken.models import Token
-
-for user in User.objects.all():
-    Token.objects.get_or_create(user=user)
-
-
 
 # Create your views here.
-class TestView(APIView):
-    def get(self, request):
-        return Response({'message' : 'test'}, status=status.HTTP_200_OK)
-
 class TaskView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -55,10 +43,9 @@ class TaskView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
-        try:
-            task = Task.objects.get(task_id=request.data['task_id'], user_id=request.user.id)
-        except Task.DoesNotExist:
-            return Response({"error": "Task not found"}, status=status.HTTP_404_NOT_FOUND)
+        task = get_object_or_404(Task, task_id=request.data['task_id'])
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
             
         serializer = TaskSerializer(task, data=request.data, partial=True)
         if serializer.is_valid():
@@ -67,6 +54,44 @@ class TaskView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request):
+        task = get_object_or_404(Task, task_id=request.data['task_id'])
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
+        task.delete()
+        return Response(status=status.HTTP_200_OK)
+
+class CompleteTaskView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, task_id):
+        task = get_object_or_404(Task, task_id=task_id)
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            serializer = TaskSerializer(task, data={'completed' : True}, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UpdateTaskView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, task_id):
+        task = get_object_or_404(Task, task_id=task_id)
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            serializer = TaskSerializer(task, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     def post(self, request):
@@ -132,34 +157,3 @@ class LogoutView(APIView):
                 return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-#@csrf_exempt
-#def login_view(request):
-#    if request.method == 'OPTIONS':
-#        response = HttpResponse(status=204)
-#        response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
-#        response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'  
-#        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-#        response['Access-Control-Allow-Credentials'] = 'true'  
-#        return response
-#    
-#    elif request.method == 'POST':
-#        data = json.loads(request.body.decode('utf-8'))
-#        username = data.get('username')
-#        password = data.get('password')
-#
-#        user = authenticate(request, username=username,password=password)
-#        if user is not None:
-#            login(request, user)
-#            response = JsonResponse({'message': 'Login successful'})
-#        else:
-#            response =  JsonResponse({'message': 'Invalid credentials testing'}, status=401)
-#    else:
-#       response =  JsonResponse({'message': 'Invalid method'}, status=405)
-#      
-#    response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
-#    response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-#    response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-#    response['Access-Control-Allow-Credentials'] = 'true'
-#    
-#    return response
