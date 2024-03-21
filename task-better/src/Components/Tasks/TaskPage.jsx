@@ -43,11 +43,10 @@ const TaskPage = () => {
     setTasks([...tasks, newTask]);
   };
   const deleteTask = (taskD) => {
-    // temp code for deleting task, need to create post req to backend
-    // for full functionality
+    // Sending backedn DELETE req to delete task
     taskD.delete = true
     fetch("http://127.0.0.1:8000/tasks/", {
-      method: "PUT",
+      method: "DELETE",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
