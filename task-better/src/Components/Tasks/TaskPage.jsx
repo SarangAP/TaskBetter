@@ -52,7 +52,9 @@ const TaskPage = () => {
   };
   // implement task update
   // such that when completed updates backend
-  const updateTask = (taskU) => { };
+  const updateTask = (taskU) => { 
+    console.log(taskU)
+  };
 
   return (
     <div
@@ -66,11 +68,10 @@ const TaskPage = () => {
         <div className="col-md-1"></div>
         <div className="col-md-3">
           <h4 className="m-2">Create a Task</h4>
-          <TaskForm addTask={addTask} />
-        </div>
+          <TaskForm addTask={addTask} />        </div>
         <div className="col-md-3"></div>
         <div className="col-md-4 mt-3">
-          <TasksView tasks={tasks} handleDelete={deleteTask} />
+          <TasksView tasks={tasks} handleDelete={deleteTask} handleUpdate={updateTask} />
         </div>
         <div className="col-md-1"></div>
       </div>

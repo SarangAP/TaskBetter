@@ -39,7 +39,8 @@ class TaskView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        tasks = Task.objects.all()
+        print(request.user)
+        tasks = Task.objects.filter(user_id=request.user.id)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
