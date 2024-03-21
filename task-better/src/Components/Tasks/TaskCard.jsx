@@ -11,6 +11,7 @@ const TaskCard = ({ task, handleDelete, handleUpdate }) => {
     setIsRotated(!isRotated);
   };
   const handleComplete = () => {
+    task.completed = !completed
     handleUpdate(task)
     setCompleted(!completed);
   };

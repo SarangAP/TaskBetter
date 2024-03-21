@@ -20,7 +20,7 @@ const TaskPage = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log("Getting data", data);
-          setTasks([...tasks, ...data])
+          setTasks([...data])
         })
         .catch((error) => {
           console.log("Error gettign data", error);
@@ -37,7 +37,7 @@ const TaskPage = () => {
     }
   });
 
-  useEffect(()=>{console.log(tasks)},[tasks])
+  useEffect(() => { console.log(tasks) }, [tasks])
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
@@ -50,10 +50,25 @@ const TaskPage = () => {
     });
     setTasks(updatedTasks);
   };
-  // implement task update
+  // implment task update/tasks
   // such that when completed updates backend
-  const updateTask = (taskU) => { 
+  const updateTask = (taskU) => {
     console.log(taskU)
+    fetch("http://127.0.0.1:8000/tasks/", {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + sessionStorage.getItem("token"),
+      },
+      body: JSON.stringify(taskU)
+    }).then(response => response.json())
+      .then(data => {
+        console.log("Task Updated", data)
+      })
+      .catch(error => {
+        console.log("Error updating task", error)
+      })
   };
 
   return (
