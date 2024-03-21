@@ -1,0 +1,35 @@
+body {
+    background-color: lightblue !important;
+  }
+.input-box{
+    
+    text-align: center;
+    position: relative;
+    top: 155px;
+    
+}
+.submit-button{
+    text-align:center;
+    border: none;
+    padding: 10px 15px;
+    position: relative;
+    top: 175px;
+
+    
+}
+.loginHeader{
+    text-align: center;
+    position: relative;
+    top: 150px;
+    
+}
+
+.login-logo{
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    max-width:15%;
+    top: 125px;
+}
