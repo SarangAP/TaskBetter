@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import "./Login.css";
 
 const Login = ({ }) => {
@@ -74,6 +74,13 @@ const Login = ({ }) => {
           <button type="button" onClick={handleLogin}>
             Log in
           </button>
+        </div>
+        <div className="submit-button">
+        <Link to="/register">
+          <button type="button"  to="/register">
+              Register for an account
+          </button>
+        </Link>
         </div>
       </form>
     </div>
