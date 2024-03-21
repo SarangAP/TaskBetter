@@ -33,7 +33,7 @@ const TaskCard = ({ task, handleDelete }) => {
       {isRotated ? (
         <div className={`row ${isRotated ? "visible" : "invisible"}`}>
           <div className="col-sm text-start ms-1">
-            <p>{task.body}</p>
+            <p>{task.description}</p>
           </div>
         </div>
       ) : (
