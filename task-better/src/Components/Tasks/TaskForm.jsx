@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
 
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
