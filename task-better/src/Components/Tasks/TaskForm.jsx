@@ -29,6 +29,8 @@ const TaskForm = ({ addTask }) => {
           if (Array.isArray(data.title) || Array.isArray(data.description))
             throw new Error("Invalid title or description");
           addTask(data);
+          setTitle("");
+          setDescription("");
         })
         .catch((error) => {
           // Handle any errors
