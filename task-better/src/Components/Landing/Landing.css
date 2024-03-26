@@ -1,0 +1,62 @@
+.landing-container {
+    padding: 100px 0;
+    text-align: center;
+  }
+  
+  .landing-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .logo-img {
+    max-width: 450px;
+  }
+  
+  .landing-heading {
+    font-size: 3rem;
+    margin-top: 30px;
+    color: #272b2e;
+  }
+  
+  .landing-text {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: #51575e;
+  }
+  
+  .buttons {
+    margin-top: 30px;
+  }
+  
+  .buttons .btn {
+    margin-right: 10px;
+  }
+  
+  .about-section {
+    padding: 70px 0; 
+    background-color: #f0f0f0;
+  }
+  
+  .section-heading {
+    font-size: 2.5rem; 
+    color: #474f57;
+  }
+  
+  .section-text {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+  .who-we-are-section {
+    padding: 70px 0; 
+    background-color: #d4dbe2; 
+  }
+  
+  .who-we-are-section .section-heading {
+    font-size: 2.5rem;
+    color: #2a4055;
+  }
+  
+  .who-we-are-section .section-text {
+    font-size: 1.2rem;
+    color: #658199;
+  }
