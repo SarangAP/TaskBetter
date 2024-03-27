@@ -16,6 +16,8 @@
     font-size: 3rem;
     margin-top: 30px;
     color: #272b2e;
+    display: flex;
+    align-items: center;
   }
   
   .landing-text {
@@ -60,3 +62,69 @@
     font-size: 1.2rem;
     color: #658199;
   }
+
+  .who-we-are-section .row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .team-members {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .team-member {
+    margin: 0 10px;
+    text-align: center;
+    flex: 0 0 auto;
+    width: calc(25% - 21px);
+    max-width: 200px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-member .name {
+    display: wrap;
+    margin-bottom: 5px;
+  }
+
+  .team-member .title {
+    display: inline-block;
+    font-style: italic;
+  }
+
+  .animated-text {
+    font-size: 115px;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .animated-text span {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 1.4s forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .better-part {
+    color: #008be6;
+  }
+  
+  .task-part {
+    color: #ffffff;
+  }
+  
