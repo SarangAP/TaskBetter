@@ -8,6 +8,7 @@ import Profile from "./Components/Profile/Profile";
 import Authenticated from "./Components/Template/Authenticated";
 import Register from "./Components/Register/Register"
 import Landing from "./Components/Landing/Landing"
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/tasks" element={<Authenticated page={<TaskPage />}/>} />
         <Route path="/profile" element={<Authenticated page={<Profile />}/>} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

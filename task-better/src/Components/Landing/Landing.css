@@ -69,6 +69,7 @@
     flex-wrap: wrap;
   }
 
+  
   .team-members {
     display: flex;
     justify-content: center;
