@@ -1,15 +1,15 @@
 .footer {
     background-color: #1f1e1e;
     color: #c9baba;
-    padding: 24px 0;
+    padding: 24px;
     text-align: center;
-    position: fixed;
-    bottom: 0;
+    position: relative;
     width: 100%;
+    margin-top: auto;
   }
   
   .content {
-    max-width: 1300px;
+    max-width: 1300px ;
     margin: 0 auto;
   }
   
