@@ -1,8 +1,7 @@
 .footer {
     background-color: #1f1e1e;
     color: #c9baba;
-    padding: 24px;
-    text-align: center;
+    padding: 10px 0;
     position: relative;
     width: 100%;
     margin-top: auto;
@@ -12,10 +11,29 @@
     max-width: 1300px ;
     margin: 0 auto;
     display: flex;
-    align-items: center
+    align-items: center;
+
   }
   
   .logo img {
-    width: 140px;
+    width: 200px;
     margin-right: 100px;
+  }
+
+.copyright {
+  text-align: center;
+}
+.footer-nav {
+  margin-top: 10px;
+  }
+
+  .link-title {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .link-title h2 {
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: underline;
   }
