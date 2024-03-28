@@ -11,5 +11,11 @@
   .content {
     max-width: 1300px ;
     margin: 0 auto;
+    display: flex;
+    align-items: center
   }
   
+  .logo img {
+    width: 140px;
+    margin-right: 100px;
+  }
