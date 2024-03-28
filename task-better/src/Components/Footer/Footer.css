@@ -12,7 +12,6 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-
   }
   
   .logo img {
@@ -36,4 +35,23 @@
     font-size: 25px;
     font-weight: bold;
     text-decoration: underline;
+  }
+
+  .newsletter {
+    margin-top: -20px;
+    margin-left: 550px;
+  }
+  
+  .newsletter input[type="email"] {
+    margin-right: 5px;
+  }
+  .newsletter button {
+    color:black;
+    background-color: white;
+    border: 0.5px solid black;
+    cursor: pointer;
+  }
+
+  .newsletter button:hover {
+    background-color: green;
   }
