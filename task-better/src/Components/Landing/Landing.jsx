@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TaskBetter_Image from "../TBNav/TaskBetterLogo.svg";
 import "./Landing.css";
+import About from "./about.md";
+import MD_Renderer from "../Template/MD_Renderer";
 
 const Landing = () => {
   const TeamMember = ({ firstName, lastName, title }) => {
@@ -29,6 +31,7 @@ const Landing = () => {
       </div>
     );
   };
+
   return (
     <div>
       <div className="landing-container">
@@ -49,7 +52,9 @@ const Landing = () => {
           <div className="row">
             <div className="col-lg-8 offset-lg-2">
               <h2 className="section-heading">About Us</h2>
-              <p className="section-text">We can discuss about us here</p>
+              <div className="section-text">
+                <MD_Renderer path={About} />
+              </div>
             </div>
           </div>
         </div>
