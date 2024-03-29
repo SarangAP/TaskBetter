@@ -110,18 +110,14 @@ class ProfileView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class LogoutView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
-        # Get the token from the Authorization header
-        auth_header = request.META.get('HTTP_AUTHORIZATION')
-        if auth_header and auth_header.startswith('Token '):
-            token = auth_header.split(' ')[1]
-            try:
-                # Retrieve the user associated with the token
-                user = Token.objects.get(key=token).user
-                # Delete the token
-                Token.objects.get(key=token).delete()
-                return Response({'message': 'Logout was successful'}, status=status.HTTP_200_OK)
-            except Token.DoesNotExist:
-                return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
-        else:
-            return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            token = Token.objects.get(user=request.user)
+            token.delete()
+            return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response({'error' : 'Invalid Token'}, status=status.HTTP_401_UNAUTHORIZED)
