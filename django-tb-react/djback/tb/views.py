@@ -43,6 +43,8 @@ class TaskView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
+        if 'task_id' not in request.data.keys():
+            return Response({'error' : 'Please provide a task id'}, status=status.HTTP_400_BAD_REQUEST)
         task = get_object_or_404(Task, task_id=request.data['task_id'])
         if request.user != task.user:
             return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
