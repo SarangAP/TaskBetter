@@ -43,6 +43,8 @@ class TaskView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
+        if 'task_id' not in request.data.keys():
+            return Response({'error' : 'Please provide a task id'}, status=status.HTTP_400_BAD_REQUEST)
         task = get_object_or_404(Task, task_id=request.data['task_id'])
         if request.user != task.user:
             return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -60,38 +62,6 @@ class TaskView(APIView):
             return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
         task.delete()
         return Response(status=status.HTTP_200_OK)
-
-class CompleteTaskView(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, task_id):
-        task = get_object_or_404(Task, task_id=task_id)
-        if request.user != task.user:
-            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
-        else:
-            serializer = TaskSerializer(task, data={'completed' : True}, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class UpdateTaskView(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, task_id):
-        task = get_object_or_404(Task, task_id=task_id)
-        if request.user != task.user:
-            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
-        else:
-            serializer = TaskSerializer(task, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     def post(self, request):
@@ -142,18 +112,14 @@ class ProfileView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class LogoutView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
-        # Get the token from the Authorization header
-        auth_header = request.META.get('HTTP_AUTHORIZATION')
-        if auth_header and auth_header.startswith('Token '):
-            token = auth_header.split(' ')[1]
-            try:
-                # Retrieve the user associated with the token
-                user = Token.objects.get(key=token).user
-                # Delete the token
-                Token.objects.get(key=token).delete()
-                return Response({'message': 'Logout was successful'}, status=status.HTTP_200_OK)
-            except Token.DoesNotExist:
-                return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
-        else:
-            return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            token = Token.objects.get(user=request.user)
+            token.delete()
+            return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response({'error' : 'Invalid Token'}, status=status.HTTP_401_UNAUTHORIZED)

@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 
 class TaskSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
+    due_date = serializers.DateField(format='iso-8601')
 
     class Meta:
         model = Task
-        fields = ['task_id', 'title', 'description', 'created', 'modified', 'completed', 'user','username']
+        fields = ['task_id', 'title', 'description', 'created', 'modified', 'completed', 'user','username', 'due_date', 'priority']
 
 class UserSerializer(serializers.ModelSerializer):
     token = serializers.ReadOnlyField(source='auth_token.key')
