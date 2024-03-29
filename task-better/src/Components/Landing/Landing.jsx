@@ -4,10 +4,11 @@ import TaskBetter_Image from "../TBNav/TaskBetterLogo.svg";
 import "./Landing.css";
 
 const Landing = () => {
-  const TeamMember = ({ name, title }) => {
+  const TeamMember = ({ firstName, lastName, title }) => {
     return (
       <div className="team-member">
-        <h2 className="name">{name}</h2>
+        <h2 className="first-name">{firstName}</h2>
+        <h2 className="last-name">{lastName}</h2>
         <p className="title">{title}</p>
       </div>
     );
@@ -58,30 +59,33 @@ const Landing = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-8 offset-lg-2">
-            <h2 className="section-heading">Who We Are</h2>
-              <p className="section-text">Might add team member info here</p>
+            <h2 className="section-heading">Meet Our Team</h2>
                 <div className="team-members">
                   <div className="team-member">
                   <TeamMember
-                    name="Sarang Patel"
+                    firstName="Sarang"
+                    lastName="Patel"
                     title="Founder"
                   />
                   </div>
                   <div className="team-member">
                   <TeamMember
-                    name="Burhanuddin Mogul"
-                    title="Frontend Developer"
+                    firstName="Burhanuddin"
+                    lastName="Mogul"
+                    title="Full-stack Developer"
                   />
                   </div>
                   <div className="team-member">
                   <TeamMember
-                    name="Raymond Moody"
+                    firstName="Raymond"
+                    lastName="Moody"
                     title="Backend Developer"
                   />
                   </div>
                   <div className="team-member">
                   <TeamMember
-                    name="Romil Patel"
+                    firstName="Romil"
+                    lastName="Patel"
                     title="Frontend Developer"
                   />
                   </div>
