@@ -1,4 +1,4 @@
-import React, {} from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./Components/Login/Login";
@@ -9,8 +9,13 @@ import Authenticated from "./Components/Template/Authenticated";
 import Register from "./Components/Register/Register"
 import Landing from "./Components/Landing/Landing"
 import Footer from "./Components/Footer/Footer";
+import ReactGA from "react-ga";
 
 function App() {
+  useEffect(() => {
+    ReactGA.initialize("G-L5GP1M1ZKF");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
     <Router>
       <div className="pages">

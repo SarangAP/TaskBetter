@@ -37,9 +37,11 @@ class TaskView(APIView):
         serializer = TaskSerializer(data=req_data)
         if serializer.is_valid():
             serializer.save()
+            print(request.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print(serializer.errors)
+            print(request.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
