@@ -1,0 +1,11 @@
+.md-content{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    max-width: 1150px;
+    margin: 0 auto;
+
+}
+body {
+    background-color: rgb(249, 242, 242) !important;
+}
