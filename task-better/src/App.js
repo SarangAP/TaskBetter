@@ -11,6 +11,7 @@ import Landing from "./Components/Landing/Landing"
 import Footer from "./Components/Footer/Footer";
 import ReactGA from "react-ga";
 import PrivacyPolicy from "./Components/Privacy/Privacy";
+import Terms from "./Components/Terms/Terms";
 
 function App() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/privacy" element={<PrivacyPolicy/>} />
+        <Route path="/terms" element={<Terms/>} />
         <Route path="/home" element={<Authenticated page={<Home/>}/>} />
         <Route path="/tasks" element={<Authenticated page={<TaskPage />}/>} />
         <Route path="/profile" element={<Authenticated page={<Profile />}/>} />
