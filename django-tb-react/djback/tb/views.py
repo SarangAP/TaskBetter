@@ -16,6 +16,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.db.models import Count, Q
 
 from .models import *
 from .serializers import *
@@ -125,3 +126,9 @@ class LogoutView(APIView):
         except Exception as e:
             print(e)
             return Response({'error' : 'Invalid Token'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class LeaderboardView(APIView):
+    def get(self, request, count=10):
+        top_users = User.objects.annotate(completed_tasks=Count("task", filter=Q(task__completed=True))).order_by("-completed_tasks")[:count]
+        serializer = LeaderboardSerializer(top_users, many=True, context={'top_users' : top_users})
+        return Response(serializer.data, status=status.HTTP_200_OK)
