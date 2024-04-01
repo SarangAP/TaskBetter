@@ -35,13 +35,14 @@
   }
   
   .about-section {
-    padding: 70px 0; 
+    padding: 25px 0; 
     background-color: #f0f0f0;
   }
   
   .section-heading {
     font-size: 2.5rem; 
     color: #474f57;
+    text-align: center;
   }
   
   .section-text {
@@ -49,26 +50,21 @@
     color: #6c757d;
   }
   .who-we-are-section {
-    padding: 70px 0; 
+    padding: 25px 0; 
     background-color: #d4dbe2; 
   }
   
-  .who-we-are-section .section-heading {
+  .who-we-are-section .section-heading { 
     font-size: 2.5rem;
-    color: #2a4055;
+    color: #085ba8;
+    text-align: center;
+    margin-bottom: 30px;
   }
   
   .who-we-are-section .section-text {
     font-size: 1.2rem;
-    color: #658199;
+    color: #99b7d1;
   }
-
-  .who-we-are-section .row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
   
   .team-members {
     display: flex;
@@ -80,21 +76,24 @@
   .team-member {
     margin: 0 10px;
     text-align: center;
-    flex: 0 0 auto;
-    width: calc(25% - 21px);
-    max-width: 200px;
+    flex-grow: 1;
+    max-width: 190px;
     flex-direction: column;
     align-items: center;
   }
 
-  .team-member .name {
-    display: wrap;
+  .team-member .first-name {
+    margin-bottom: 0px;
+  }
+
+  .team-member .last-name {
     margin-bottom: 5px;
   }
 
   .team-member .title {
     display: inline-block;
     font-style: italic;
+    font-size: 1.0rem;
   }
 
   .animated-text {
