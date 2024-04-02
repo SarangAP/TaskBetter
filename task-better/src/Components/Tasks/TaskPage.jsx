@@ -100,7 +100,7 @@ const TaskPage = () => {
           <TaskForm addTask={addTask} />        </div>
         <div className="col-md-3"></div>
         <div className="col-md-4 mt-3">
-          <TasksView tasks={tasks} handleDelete={deleteTask} handleUpdate={updateTask} />
+          <TasksView tasks={tasks} handleDelete={deleteTask} handleUpdate={updateTask} />  
         </div>
         <div className="col-md-1"></div>
       </div>
