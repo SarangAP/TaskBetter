@@ -25,11 +25,9 @@ const TBNav = () => {
       });
       if (response.ok) {
         console.log("Logout successful", response);
-        response.json().then((data) => {
           sessionStorage.removeItem("token");
           sessionStorage.removeItem("user");
           window.location.href = "/";
-        });
       } else {
         const data = await response.json();
         console.error(data.message);
