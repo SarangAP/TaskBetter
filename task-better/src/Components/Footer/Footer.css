@@ -1,0 +1,57 @@
+.footer {
+    background-color: #1f1e1e;
+    color: #c9baba;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+    margin-top: auto;
+  }
+  
+  .content {
+    max-width: 1300px ;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 200px;
+    margin-right: 100px;
+  }
+
+.copyright {
+  text-align: center;
+}
+.footer-nav {
+  margin-top: 10px;
+  }
+
+  .link-title {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .link-title h2 {
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .newsletter {
+    margin-top: -20px;
+    margin-left: 550px;
+  }
+  
+  .newsletter input[type="email"] {
+    margin-right: 5px;
+  }
+  .newsletter button {
+    color:black;
+    background-color: white;
+    border: 0.5px solid black;
+    cursor: pointer;
+  }
+
+  .newsletter button:hover {
+    background-color: green;
+  }

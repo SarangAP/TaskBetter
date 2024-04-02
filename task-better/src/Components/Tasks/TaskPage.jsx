@@ -6,29 +6,84 @@ const TaskPage = () => {
   const [tasks, setTasks] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
+  const fetchTasksOnLoad = async () => {
+    fetch("http://127.0.0.1:8000/tasks/", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + sessionStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Getting data", data);
+        setTasks([...data])
+      })
+      .catch((error) => {
+        console.log("Error gettign data", error);
+      });
+  };
   useEffect(() => {
-     if (!user) {
+    fetchTasksOnLoad()
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
       console.log("NO USER");
       setUser(JSON.parse(sessionStorage.getItem("user")));
       console.log("USER FOUND", user);
     }
   });
 
+  useEffect(() => { console.log(tasks) }, [tasks])
+
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
   };
   const deleteTask = (taskD) => {
-    // temp code for deleting task, need to create post req to backend
-    // for full functionality
-    const updatedTasks = tasks.filter((task) => {
-      return task.title !== taskD.title || task.body !== taskD.body;
-    });
-    setTasks(updatedTasks);
+    // Sending backedn DELETE req to delete task
+    taskD.delete = true
+    fetch("http://127.0.0.1:8000/tasks/", {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + sessionStorage.getItem("token"),
+      },
+      body: JSON.stringify(taskD)
+    }).then(response => response.json())
+      .then(data => {
+        console.log("Task Deleted", data)
+      })
+      .catch(error => {
+        console.log("Error deleting task", error)
+      })
+    const updatedTasks = tasks.filter(task => task.task_id != taskD.task_id)
+    setTasks(updatedTasks)
   };
-  // implement task update
+
+  // implment task update/tasks
   // such that when completed updates backend
-  const updateTask = (taskU) => { };
+  const updateTask = (taskU) => {
+    console.log(taskU)
+    fetch("http://127.0.0.1:8000/tasks/", {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + sessionStorage.getItem("token"),
+      },
+      body: JSON.stringify(taskU)
+    }).then(response => response.json())
+      .then(data => {
+        console.log("Task Updated", data)
+      })
+      .catch(error => {
+        console.log("Error updating task", error)
+      })
+  };
 
   return (
     <div
@@ -42,11 +97,10 @@ const TaskPage = () => {
         <div className="col-md-1"></div>
         <div className="col-md-3">
           <h4 className="m-2">Create a Task</h4>
-          <TaskForm addTask={addTask} />
-        </div>
+          <TaskForm addTask={addTask} />        </div>
         <div className="col-md-3"></div>
         <div className="col-md-4 mt-3">
-          <TasksView tasks={tasks} handleDelete={deleteTask} />
+          <TasksView tasks={tasks} handleDelete={deleteTask} handleUpdate={updateTask} />
         </div>
         <div className="col-md-1"></div>
       </div>

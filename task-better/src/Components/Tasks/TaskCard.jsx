@@ -3,14 +3,16 @@ import Trash from "../icons/Trash";
 import Caret from "../icons/Caret";
 import CheckBox from "../icons/CheckBox";
 
-const TaskCard = ({ task, handleDelete }) => {
+const TaskCard = ({ task, handleDelete, handleUpdate }) => {
   const [isRotated, setIsRotated] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(task.completed);
 
   const handleDropDown = () => {
     setIsRotated(!isRotated);
   };
   const handleComplete = () => {
+    task.completed = !completed
+    handleUpdate(task)
     setCompleted(!completed);
   };
   return (
@@ -33,7 +35,7 @@ const TaskCard = ({ task, handleDelete }) => {
       {isRotated ? (
         <div className={`row ${isRotated ? "visible" : "invisible"}`}>
           <div className="col-sm text-start ms-1">
-            <p>{task.body}</p>
+            <p>{task.description}</p>
           </div>
         </div>
       ) : (

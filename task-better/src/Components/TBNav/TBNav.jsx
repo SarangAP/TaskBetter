@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa"; // Example icon from React Icons
 import "./TBNav.css";
-import TaskBetter_Image from "./TaskBetterLogo.svg"
+import TaskBetter_Image from "./TaskBetterLogo.svg";
 
 const TBNav = () => {
   const [showAccountMenu, setAccountMenu] = useState(false);
@@ -20,7 +20,7 @@ const TBNav = () => {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': 'Token ' + sessionStorage.getItem('token')
+          Authorization: "Token " + sessionStorage.getItem("token"),
         },
       });
       if (response.ok) {
@@ -37,7 +37,9 @@ const TBNav = () => {
     } catch (error) {
       console.error("Error during logout:", error);
     }
+  };
 
+  const buttonbug = () => {
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,13 +50,14 @@ const TBNav = () => {
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
+          data-toggle="collapse"
+          data-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={buttonbug}
         >
-          <FaBars />
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
@@ -78,7 +81,7 @@ const TBNav = () => {
                 More
               </label>
               {showAccountMenu ? (
-                <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4 ">
+                <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4" style={{'z-index': '1000'}}>
                   <p onClick={closeAccountMenu}>Click to Close</p>
                   <label className="nav-link" onClick={logout}>
                     Logout
@@ -88,19 +91,6 @@ const TBNav = () => {
                 <></>
               )}
             </li>
-            {/*<div className="dropdown">
-              <button className="dropbtn">
-                <Link className="">
-                Profile
-                </Link>
-                <i className="fa fa-caret-down"></i>
-              </button>
-              <div className="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-              </div>
-            </div>*/}
           </ul>
         </div>
       </div>
