@@ -1,39 +1,28 @@
-from django.shortcuts import render
+import json
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
 
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 from django.utils.decorators import method_decorator
-import json
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.db.models import Count, Q
 
 from .models import *
 from .serializers import *
 
-from rest_framework.authtoken.models import Token
-'''
-Just to create tokens for existing users. Delete after we all have tokens for our existing super users
-Only uncomment after running `python manage.py migrate authtoken`
-'''
-from rest_framework.authtoken.models import Token
-
-for user in User.objects.all():
-    Token.objects.get_or_create(user=user)
-
-
 
 # Create your views here.
-class TestView(APIView):
-    def get(self, request):
-        return Response({'message' : 'test'}, status=status.HTTP_200_OK)
-
 class TaskView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -49,16 +38,19 @@ class TaskView(APIView):
         serializer = TaskSerializer(data=req_data)
         if serializer.is_valid():
             serializer.save()
+            print(request.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print(serializer.errors)
+            print(request.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
-        try:
-            task = Task.objects.get(task_id=request.data['task_id'], user_id=request.user.id)
-        except Task.DoesNotExist:
-            return Response({"error": "Task not found"}, status=status.HTTP_404_NOT_FOUND)
+        if 'task_id' not in request.data.keys():
+            return Response({'error' : 'Please provide a task id'}, status=status.HTTP_400_BAD_REQUEST)
+        task = get_object_or_404(Task, task_id=request.data['task_id'])
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
             
         serializer = TaskSerializer(task, data=request.data, partial=True)
         if serializer.is_valid():
@@ -67,6 +59,12 @@ class TaskView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request):
+        task = get_object_or_404(Task, task_id=request.data['task_id'])
+        if request.user != task.user:
+            return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
+        task.delete()
+        return Response(status=status.HTTP_200_OK)
 
 class LoginView(APIView):
     def post(self, request):
@@ -117,49 +115,20 @@ class ProfileView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class LogoutView(APIView):
-    def post(self, request):
-        # Get the token from the Authorization header
-        auth_header = request.META.get('HTTP_AUTHORIZATION')
-        if auth_header and auth_header.startswith('Token '):
-            token = auth_header.split(' ')[1]
-            try:
-                # Retrieve the user associated with the token
-                user = Token.objects.get(key=token).user
-                # Delete the token
-                Token.objects.get(key=token).delete()
-                return Response({'message': 'Logout was successful'}, status=status.HTTP_200_OK)
-            except Token.DoesNotExist:
-                return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
-        else:
-            return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
-#@csrf_exempt
-#def login_view(request):
-#    if request.method == 'OPTIONS':
-#        response = HttpResponse(status=204)
-#        response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
-#        response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'  
-#        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-#        response['Access-Control-Allow-Credentials'] = 'true'  
-#        return response
-#    
-#    elif request.method == 'POST':
-#        data = json.loads(request.body.decode('utf-8'))
-#        username = data.get('username')
-#        password = data.get('password')
-#
-#        user = authenticate(request, username=username,password=password)
-#        if user is not None:
-#            login(request, user)
-#            response = JsonResponse({'message': 'Login successful'})
-#        else:
-#            response =  JsonResponse({'message': 'Invalid credentials testing'}, status=401)
-#    else:
-#       response =  JsonResponse({'message': 'Invalid method'}, status=405)
-#      
-#    response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
-#    response['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-#    response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-#    response['Access-Control-Allow-Credentials'] = 'true'
-#    
-#    return response
+    def post(self, request):
+        try:
+            token = Token.objects.get(user=request.user)
+            token.delete()
+            return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response({'error' : 'Invalid Token'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class LeaderboardView(APIView):
+    def get(self, request, count=10):
+        top_users = User.objects.annotate(completed_tasks=Count("task", filter=Q(task__completed=True))).order_by("-completed_tasks")[:count]
+        serializer = LeaderboardSerializer(top_users, many=True, context={'top_users' : top_users})
+        return Response(serializer.data, status=status.HTTP_200_OK)

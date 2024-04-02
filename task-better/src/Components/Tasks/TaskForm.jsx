@@ -4,13 +4,15 @@ const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [completed, setCompleted] = useState(false);
+  const [due_date, setDueDate] = useState(new Date());
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Check if title and description are empty
-    if (title.trim() === "" || description.trim() === "") {
+    if (title.trim() === "" || description.trim() === "" || due_date === "") {
       console.log("Title and description cannot be empty");
+      alert("Please fill out all the field");
       // return;
     } else {
       fetch("http://127.0.0.1:8000/tasks/", {
@@ -20,15 +22,19 @@ const TaskForm = ({ addTask }) => {
           "Content-Type": "application/json",
           Authorization: "Token " + sessionStorage.getItem("token"),
         },
-        body: JSON.stringify({ title, description, completed }),
+        body: JSON.stringify({ title, description, completed, due_date }),
       })
         .then((response) => response.json())
         .then((data) => {
           // Handle the response data
           console.log("New Task that is being added",data);
+          console.log("Selected due date", due_date);
           if (Array.isArray(data.title) || Array.isArray(data.description))
             throw new Error("Invalid title or description");
           addTask(data);
+          setTitle("");
+          setDescription("");
+          setDueDate("");
         })
         .catch((error) => {
           // Handle any errors
@@ -64,6 +70,17 @@ const TaskForm = ({ addTask }) => {
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
+        <div className="mb-3">
+          <label> Set due date</label>
+          <input
+            type="date"
+            className="form-control"
+            id="dueDate"
+            value={due_date}
+            onChange={(e) => setDueDate(e.target.value)}
+            />
+        </div>
+        <br></br>
         <button type="submit" className="btn btn-primary mx-auto">
           Submit
         </button>

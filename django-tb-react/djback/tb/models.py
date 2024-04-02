@@ -12,9 +12,15 @@ class Task(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=256) 
+    due_date = models.DateField(null=False)
+    priority = models.IntegerField(null=False, default=1)
     created = models.DateTimeField(default=timezone.now)
     modified = models.DateTimeField(default=timezone.now)
     completed = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        self.modified = timezone.now()
+        super(Task, self).save(*args, **kwargs)
 
     class Meta:
         managed = True
