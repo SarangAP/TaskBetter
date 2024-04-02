@@ -21,11 +21,11 @@ from tb.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', TestView.as_view(), name='test'),
     path('login/', LoginView.as_view(), name='login'),
     path('tasks/', TaskView.as_view(), name='tasks'),
     path('profile/', ProfileView.as_view(), name='profile_view'),
     path('register/', RegisterView.as_view(), name='register'),
-    path('logout/', LogoutView.as_view(), name="logout")
-
+    path('logout/', LogoutView.as_view(), name="logout"),
+    path('leaderboard/', LeaderboardView.as_view(), name='leaderboard'),
+    path('leaderboard/<int:count>', LeaderboardView.as_view(), name='leaderboard_with_count'),
 ]

@@ -171,3 +171,6 @@ db.sqlite3-journal
 
 # env:
 .env
+
+# Django migrations
+/django-tb-react/djback/tb/migrations
