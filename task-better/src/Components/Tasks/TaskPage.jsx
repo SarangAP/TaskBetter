@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import TaskForm from "./TaskForm";
 import TasksView from "./TasksView";
+import Calendar from 'react-calendar';
+import moment from "moment"
+import 'react-calendar/dist/Calendar.css';
 
 const TaskPage = () => {
   const [tasks, setTasks] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedDate, setSelectedDate] = useState();
 
   const fetchTasksOnLoad = async () => {
     fetch("http://127.0.0.1:8000/tasks/", {
@@ -22,7 +26,7 @@ const TaskPage = () => {
         setTasks([...data])
       })
       .catch((error) => {
-        console.log("Error gettign data", error);
+        console.log("Error getting data", error);
       });
   };
   useEffect(() => {
@@ -43,7 +47,7 @@ const TaskPage = () => {
     setTasks([...tasks, newTask]);
   };
   const deleteTask = (taskD) => {
-    // Sending backedn DELETE req to delete task
+    // Sending backend DELETE req to delete task
     taskD.delete = true
     fetch("http://127.0.0.1:8000/tasks/", {
       method: "DELETE",
@@ -85,6 +89,18 @@ const TaskPage = () => {
       })
   };
 
+  const calDates = ({ date, view }) => {
+    if (view === 'month') {
+      const dueTasks = tasks.filter(task => moment(task.due_date).isSame(date, 'day'));
+      if (dueTasks.length > 0) {
+        return (
+          <p style={{ fontSize: '10px', margin: 0, padding: 0 }}>{dueTasks.length} tasks</p>
+        );
+      }
+    }
+    return null;
+  };
+
   return (
     <div
       className="container-fluid vh-100"
@@ -97,7 +113,16 @@ const TaskPage = () => {
         <div className="col-md-1"></div>
         <div className="col-md-3">
           <h4 className="m-2">Create a Task</h4>
-          <TaskForm addTask={addTask} />        </div>
+          <TaskForm addTask={addTask} />
+        </div>
+          <div className="col-md-4 mt-3">
+          <Calendar
+            onChange={calDates}
+            value={selectedDate}
+            className="react-calendar"
+            tileContent={calDates}
+          />
+        </div>
         <div className="col-md-3"></div>
         <div className="col-md-4 mt-3">
           <TasksView tasks={tasks} handleDelete={deleteTask} handleUpdate={updateTask} />  
