@@ -105,7 +105,7 @@ const TaskPage = () => {
       const dueTasks = tasks.filter(task => moment(task.due_date).isSame(date, 'day'));
       if (dueTasks.length > 0) {
         return (
-          <p style={{ fontSize: '10px', margin: 0, padding: 0 }}>{dueTasks.length} tasks</p>
+          <p style={{ fontSize: '9px', margin: 0, padding: 0 }}>{dueTasks.length} task(s)</p>
         );
       }
     }
@@ -120,8 +120,7 @@ const TaskPage = () => {
         fontFamily: "Lexend Exa, sans-serif",
       }}
     >
-      <div className="row m-4 mt-0 h-75">
-        <div className="col-md-1"></div>
+      <div className="row m-4 mt-3 h-75">
         <div className="col-md-3">
           <h4 className="m-2">Create a Task</h4>
           <TaskForm addTask={addTask} />
@@ -135,8 +134,7 @@ const TaskPage = () => {
             onClickDay={handleDateClick}
           />
         </div>
-        <div className="col-md-3"></div>
-        <div className="col-md-4 mt-3">
+        <div className="col-md-5 mt-3">
           <TasksView tasks={tasks} handleDelete={deleteTask} handleUpdate={updateTask} />  
         </div>
         <div className="col-md-1"></div>
