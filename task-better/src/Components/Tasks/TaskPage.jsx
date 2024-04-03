@@ -3,13 +3,16 @@ import TaskForm from "./TaskForm";
 import TasksView from "./TasksView";
 import Calendar from 'react-calendar';
 import moment from "moment"
+import { Modal, Button } from 'react-bootstrap';
 import 'react-calendar/dist/Calendar.css';
 
 const TaskPage = () => {
   const [tasks, setTasks] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTasks, setSelectedTasks] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchTasksOnLoad = async () => {
     fetch("http://127.0.0.1:8000/tasks/", {
@@ -89,6 +92,14 @@ const TaskPage = () => {
       })
   };
 
+  const handleDateClick = (date) => {
+    const dueTasks = tasks.filter(task => moment(task.due_date).isSame(date, 'day'));
+    console.log("Due Tasks: ", dueTasks);
+    setSelectedTasks(dueTasks);
+    setSelectedDate(date);
+    setShowModal(true);
+  };
+
   const calDates = ({ date, view }) => {
     if (view === 'month') {
       const dueTasks = tasks.filter(task => moment(task.due_date).isSame(date, 'day'));
@@ -121,6 +132,7 @@ const TaskPage = () => {
             value={selectedDate}
             className="react-calendar"
             tileContent={calDates}
+            onClickDay={handleDateClick}
           />
         </div>
         <div className="col-md-3"></div>
@@ -129,6 +141,34 @@ const TaskPage = () => {
         </div>
         <div className="col-md-1"></div>
       </div>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Tasks for {moment(selectedDate).format('MMMM DD, YYYY')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedTasks.length > 0 ? (
+          <ul>
+            {selectedTasks.map(task => (
+              <li key={task.task_id}>
+                <h3>{task.title}</h3>
+                <p>Description: {task.description}</p>
+                <p>Due date: {moment(task.due_date).format("MM/DD/YYYY")}</p>
+                <p>Priority: {task.priority}</p>
+                <p>Completed: {task.completed.toString()}</p>
+                <p>Task created: {moment(task.created).format("MMMM DD, YYYY h:mm:ss A")}</p>
+              </li>
+            ))}
+          </ul>
+          ) : (
+            <p>No tasks due this day</p>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
