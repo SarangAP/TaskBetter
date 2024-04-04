@@ -1,0 +1,20 @@
+name: Prevent PRs into main from branches that are not prod
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checking if branch is prod
+        run: echo "Checking if branch is prod"
+        if: ${{ github.event.pull_request.head.ref != 'prod' }}
+      
+      - name: Prevent merge
+        run: |
+          echo "Please merge into main only from prod"
+          exit 1
