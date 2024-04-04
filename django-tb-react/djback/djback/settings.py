@@ -87,13 +87,21 @@ WSGI_APPLICATION = 'djback.wsgi.application'
 #DB_PORT=3306
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
+    'prod': {
+        'ENGINE': config('DB_ENGINE'),
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
         'PORT': config('DB_PORT'),
+    },
+    'default': {
+        'ENGINE': config('DB_PROD_ENGINE'),
+        'NAME': config('DB_PROD_NAME'),
+        'USER': config('DB_PROD_USER'),
+        'PASSWORD': config('DB_PROD_PASSWORD'),
+        'HOST': config('DB_PROD_HOST'),
+        'PORT': config('DB_PROD_PORT'),
     }
 }
 
