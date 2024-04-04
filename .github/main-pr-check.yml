@@ -7,12 +7,13 @@ on:
       - opened
 
 jobs:
+  check-branch:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checking if branch is prod
         run: |
           if [[ "${{ github.event.pull_request.base.ref }}" == "main" && "${{ github.event.pull_request.head.ref }}" != "prod" ]]; then
-          echo "Please merge into main only from prod branch"
+            echo "Please merge into main only from prod branch"
             exit 1
           fi
