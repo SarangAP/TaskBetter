@@ -25,11 +25,9 @@ const TBNav = () => {
       });
       if (response.ok) {
         console.log("Logout successful", response);
-        response.json().then((data) => {
           sessionStorage.removeItem("token");
           sessionStorage.removeItem("user");
           window.location.href = "/";
-        });
       } else {
         const data = await response.json();
         console.error(data.message);
@@ -45,7 +43,8 @@ const TBNav = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <Link className="navbar-brand" to="/home">
-          <img src={TaskBetter_Image} alt="TaskBetter Logo" />
+          {/*<img src={TaskBetter_Image} alt="TaskBetter Logo" />*/}
+          <label className="fs-2">Task</label><label className="fs-2" style={{'color':'#008be6'}}>Better</label>
         </Link>
         <button
           className="navbar-toggler"
@@ -62,7 +61,7 @@ const TBNav = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/home">
+              <Link className="nav-link hoverlink" to="/home">
                 Home
               </Link>
             </li>

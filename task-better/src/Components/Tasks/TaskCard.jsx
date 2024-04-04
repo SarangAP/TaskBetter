@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Trash from "../icons/Trash";
 import Caret from "../icons/Caret";
 import CheckBox from "../icons/CheckBox";
+import moment from "moment"
 
 const TaskCard = ({ task, handleDelete, handleUpdate }) => {
   const [isRotated, setIsRotated] = useState(false);
@@ -35,7 +36,11 @@ const TaskCard = ({ task, handleDelete, handleUpdate }) => {
       {isRotated ? (
         <div className={`row ${isRotated ? "visible" : "invisible"}`}>
           <div className="col-sm text-start ms-1">
-            <p>{task.description}</p>
+            <p>Description: {task.description}</p>
+            <p>Due date: {moment(task.due_date).format("MM/DD/YYYY")}</p>
+            <p>Priority: {task.priority}</p>
+            <p>Completed: {task.completed.toString()}</p>
+            <p>Task created: {moment(task.created).format("MMMM DD, YYYY h:mm:ss A")}</p>
           </div>
         </div>
       ) : (
