@@ -21,9 +21,16 @@ body {
     text-align: center;
     position: relative;
     top: 150px;
+    border-style: solid; /* login page enchancement*/
+    background-color: white; /* login page enchancement*/
+    animation-name: loginHereBox; /* login page enchancement*/
+    animation-duration: 5s; /*login page enhancement */
     
 }
-
+@keyframes loginHereBox{ 
+    from {background-color: white;} /* login page enchancement*/
+    to {background-color: yellow;}/* login page enchancement*/
+}
 .login-logo{
     text-align: center;
     display: block;
