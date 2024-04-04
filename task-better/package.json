@@ -1,7 +1,6 @@
 {
   "name": "task-better",
   "version": "0.1.0",
-  "homepage": "https://sarangap.github.io/TaskBetter",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
