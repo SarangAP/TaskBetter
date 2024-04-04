@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/TaskBetter/static/css/main.7dfa4c40.css",
+    "main.js": "/TaskBetter/static/js/main.2dfbe6e9.js",
+    "static/js/453.e1e64b6c.chunk.js": "/TaskBetter/static/js/453.e1e64b6c.chunk.js",
+    "static/media/TaskBetterLogo.svg": "/TaskBetter/static/media/TaskBetterLogo.edff39798d8d0be684a6ecb847b4640f.svg",
+    "static/media/Privacy.md": "/TaskBetter/static/media/Privacy.044a4e0ba8129d9c0398.md",
+    "static/media/Terms.md": "/TaskBetter/static/media/Terms.84a7a8fe5a773b21996f.md",
+    "static/media/checkbox.svg": "/TaskBetter/static/media/checkbox.49d2d8e80a96a38fb2027e9a429eea2a.svg",
+    "static/media/uncheckbox.svg": "/TaskBetter/static/media/uncheckbox.3923c9ab245ef8f9e52f9564e27d8ad0.svg",
+    "index.html": "/TaskBetter/index.html",
+    "static/media/about.md": "/TaskBetter/static/media/about.878165bfdd8eb0d9a507.md",
+    "main.7dfa4c40.css.map": "/TaskBetter/static/css/main.7dfa4c40.css.map",
+    "main.2dfbe6e9.js.map": "/TaskBetter/static/js/main.2dfbe6e9.js.map",
+    "453.e1e64b6c.chunk.js.map": "/TaskBetter/static/js/453.e1e64b6c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7dfa4c40.css",
+    "static/js/main.2dfbe6e9.js"
+  ]
+}
