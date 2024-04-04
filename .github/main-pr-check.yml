@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checking if branch is prod
         run: echo "Checking if branch is prod"
-        if: ${{ github.event.pull_request.head.ref != 'prod' }}
+        if: ${{ github.event.pull_request.base.ref != 'prod' }}
       
       - name: Prevent merge
         run: |
