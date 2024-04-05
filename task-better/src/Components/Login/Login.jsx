@@ -52,8 +52,11 @@ const Login = ({ }) => {
     
     <div className="wrapper">
     <div className="login-logo">
-      <img src={TaskBetter_Image} alt="TaskBetter Logo" /> </div>
+      <img src={TaskBetter_Image} alt="TaskBetter Logo" /> 
+      </div>
+      
       <form>
+      <div className="formBox">
         <h1 className="loginHeader">Login Here</h1>
         <div className="input-box">
           <input
@@ -86,8 +89,10 @@ const Login = ({ }) => {
           </button>
         </Link>
         </div>
+        </div>
       </form>
     </div>
+    
   );
 };
 

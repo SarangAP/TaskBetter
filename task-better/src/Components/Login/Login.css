@@ -5,7 +5,8 @@ body {
     
     text-align: center;
     position: relative;
-    top: 155px;
+    top: 70px;
+    
     
 }
 .submit-button{
@@ -13,23 +14,16 @@ body {
     border: none;
     padding: 10px 15px;
     position: relative;
-    top: 175px;
+    top: 85px;
+    
 
     
 }
 .loginHeader{
     text-align: center;
     position: relative;
-    top: 150px;
-    border-style: solid; /* login page enchancement*/
-    background-color: white; /* login page enchancement*/
-    animation-name: loginHereBox; /* login page enchancement*/
-    animation-duration: 5s; /*login page enhancement */
+    top: -30px;
     
-}
-@keyframes loginHereBox{ 
-    from {background-color: white;} /* login page enchancement*/
-    to {background-color: yellow;}/* login page enchancement*/
 }
 .login-logo{
     text-align: center;
@@ -38,5 +32,13 @@ body {
     margin-right: auto;
     position: relative;
     max-width:15%;
-    top: 125px;
+    top: 0px;
 }
+
+.formBox {
+    width: 400px; 
+    border: 2px solid #333; 
+    padding: 80px; 
+    margin: 20px auto; 
+  }
+  

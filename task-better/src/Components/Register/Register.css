@@ -10,16 +10,8 @@
     text-align: center;
     position: relative;
     top: 22px;
-    border-style: solid; /* register page enchancement*/
-    background-color: white; /* register page enchancement*/
-    animation-name: registerHereBox; /* register page enchancement*/
-    animation-duration: 5s; /*register page enhancement */
-
   }
-  @keyframes registerHereBox{ /* register page enchancement*/
-  from {background-color: white;} /* register page enchancement*/
-  to {background-color: yellow;}/* register page enchancement*/
-}
+    
 .errorMessage{
   text-align: center;
   position: relative;
