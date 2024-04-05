@@ -87,6 +87,15 @@ const TBNav = () => {
               {showAccountMenu ? (
                 <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4" style={{'z-index': '1000'}}>
                   <p onClick={closeAccountMenu}>Click to Close</p>
+                  <Link className="nav-link" to="/privacy">
+                    Privacy Policy
+                  </Link>
+                  <Link className="nav-link" to="/terms">
+                    Terms & Conditions
+                  </Link>
+                  <Link className="nav-link" to="/contact-us">
+                    Contact Us
+                  </Link>
                   <label className="nav-link" onClick={logout}>
                     Logout
                   </label>
