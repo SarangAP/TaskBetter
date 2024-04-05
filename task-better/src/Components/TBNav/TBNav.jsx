@@ -76,6 +76,11 @@ const TBNav = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/leaderboard">
+                Leaderboard
+              </Link>
+            </li>
+            <li className="nav-item">
               <label className="nav-link" onClick={handleProfileClick}>
                 More
               </label>
