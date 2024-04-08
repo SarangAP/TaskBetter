@@ -1,0 +1,44 @@
+
+.leaderboard-main {
+    width: 75%;
+    margin: 0 auto;
+    margin-bottom: 40px;
+  }
+  
+  .leaderboard-title {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+  }
+  
+  .leaderboard-table {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .leaderboard-table td {
+    border: 10px solid #ffffff;
+    padding: 8px;
+  }
+  
+  .leaderboard-table th {
+    text-align: center;
+    background-color: #5858d7;
+    padding: 8px;
+    border: 1px solid #ffffff;
+  }
+  
+  .leaderboard-table td {
+    border: 2px solid #ffffff;
+    padding: 8px;
+  }
+  
+  .leaderboard-table tbody tr:nth-child(even) {
+    background-color: #5f8cbb;
+  }
+  
+  .leaderboard-row {
+    padding: 9px;
+  }
+  
