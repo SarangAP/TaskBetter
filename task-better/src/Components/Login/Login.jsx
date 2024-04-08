@@ -10,6 +10,11 @@ const Login = ({ }) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   
+  //Scrolling to top of screen after page redirect
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   useEffect(() => {
     const sessionToken = sessionStorage.getItem("token");
     if (sessionToken) {
