@@ -23,28 +23,33 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Task Leaderboard</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Tasks Completed</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stats.map((user, index) => (
-            <tr key={user.id}>
-              <td>{index + 1}</td>
-              <td>{user.username}</td>
-              <td>{user.completed_tasks}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="leaderboard-main">
+      <h1 className="leaderboard-title">Task Leaderboard</h1>
+      <div className="leaderboard-table">
+          <div className="leaderboard-row">
+            <table className="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Username</th>
+                  <th>Tasks Completed</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.map((user, index) => (
+                  <tr key={user.id}>
+                    <td>{index + 1}</td>
+                    <td>{user.username}</td>
+                    <td>{user.completed_tasks}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+        </div>
+      </div>
     </div>
   );
 };
+
 
 export default Leaderboard;
