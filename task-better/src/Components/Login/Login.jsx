@@ -2,12 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link} from "react-router-dom";
 import "./Login.css";
 import TaskBetter_Image from "../TBNav/TaskBetterLogo.svg"
+import { CgProfile } from "react-icons/cg";
+import { FaLock } from "react-icons/fa";
 
 const Login = ({ }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  
+  //Scrolling to top of screen after page redirect
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   useEffect(() => {
     const sessionToken = sessionStorage.getItem("token");
     if (sessionToken) {
@@ -48,52 +55,46 @@ const Login = ({ }) => {
     }
   };
 
-  return (
-    
-    <div className="wrapper">
-    <div className="login-logo">
-      <img src={TaskBetter_Image} alt="TaskBetter Logo" /> 
-      </div>
-      
-      <form>
-      <div className="formBox">
-        <h1 className="loginHeader">Login Here</h1>
-        <div className="input-box">
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="submit-button">
-          <button type="button" onClick={handleLogin}>
-            Log in
-          </button>
-        </div>
-        <div className="submit-button">
-        <Link to="/register">
-          <button type="button"  to="/register">
-              Register for an account
-          </button>
-        </Link>
-        </div>
-        </div>
-      </form>
+return (
+  <div className="login-container">
+    <div className="logo-img">
+    <img src={TaskBetter_Image} alt="TaskBetter Logo" />
     </div>
-    
-  );
-};
+    <div className="loginHeader">
+      <div className="login-title">Login</div>
+      <div className="login-underline"></div>
+    </div>
+  <div className="login-fields">
+  <div className="login-field">
+    <CgProfile />
+    <input
+    type="text"
+    placeholder="Username"
+    value={username}
+    onChange={(e) => setUsername(e.target.value)}
+    onClick={handleLogin}
+    required
+    />
+  </div>
+  <div className="login-field">
+  <div className="input">
+    <FaLock />
+    <input
+    type="password"
+    placeholder="Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+    />
+  </div>
+  </div>
+</div>
+<div className="submit-container-login">
+  <Link to="/register" className="login-submit">Register</Link>
+  <div className="login-submit" onClick={handleLogin}>Login</div>
+</div>
+  </div>
+)
+}
 
 export default Login;

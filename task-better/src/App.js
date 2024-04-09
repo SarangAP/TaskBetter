@@ -13,6 +13,7 @@ import ReactGA from "react-ga";
 import PrivacyPolicy from "./Components/Privacy/Privacy";
 import Terms from "./Components/Terms/Terms";
 import Leaderboard from "./Components/Leaderboard/Leaderboard";
+import ErrorPage from "./Components/404/404";
 
 function App() {
   useEffect(() => {
@@ -32,6 +33,8 @@ function App() {
         <Route path="/tasks" element={<Authenticated page={<TaskPage />}/>} />
         <Route path="/profile" element={<Authenticated page={<Profile />}/>} />
         <Route path="/leaderboard" element={<Authenticated page={<Leaderboard />}/>} />
+        <Route path="*" element={<ErrorPage />} />
+
       </Routes>
         <Footer />
       </div>

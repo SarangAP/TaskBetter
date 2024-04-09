@@ -1,44 +1,89 @@
-body {
-    background-color: lightblue !important;
-  }
-.input-box{
-    
-    text-align: center;
-    position: relative;
-    top: 70px;
-    
-    
+.login-container {
+    background: #e0e0f3;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom:130px;
+    height: fit-content;
+    width: 500px;
+    align-items:center;
+    justify-content: center;
+    border-radius: 15px;
+    transform: translate(100%,0%);
 }
-.submit-button{
-    text-align:center;
+.logo-img{
+    width:250px;
+    margin-top: 20px;
+}
+.loginHeader {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-title{
+    color: #2700e9;
+    font-size: 52px;
+    font-weight: 720;
+}
+
+.login-underline{
+    background: #2700e9;
+    width: 80px;
+    height: 5px;
+    border-radius: 10px;
+}
+
+.login-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.login-field svg {
+    margin: 0px 10px;
+}
+
+.login-field {
+    background: #f6eaea;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 450px;
+    height: 80px;
+    border-radius: 20px;
+}
+
+.login-field input {
+    background: transparent;
+    color:#636363;
+    font-size: 20px;
+    height: 50px;
+    width: 400px;
     border: none;
-    padding: 10px 15px;
-    position: relative;
-    top: 85px;
-    
-
-    
-}
-.loginHeader{
-    text-align: center;
-    position: relative;
-    top: -30px;
-    
-}
-.login-logo{
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    max-width:15%;
-    top: 0px;
+    outline: none;
 }
 
-.formBox {
-    width: 400px; 
-    border: 2px solid #333; 
-    padding: 80px; 
-    margin: 20px auto; 
-  }
-  
+.submit-container-login {
+    display: flex;
+    gap: 11px;
+    margin: 35px auto;
+}
+
+.login-submit {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    background: #2700e9;
+    border-radius: 35px;
+    color:#ffffff;
+    font-size: 20px;
+    font-weight: 650;
+    width: 220px; 
+    height: 65px;
+    text-decoration: none;
+}
