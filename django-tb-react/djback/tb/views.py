@@ -71,8 +71,9 @@ class LoginView(APIView):
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(request, username=username,password=password)
-        Token.objects.get_or_create(user=user)
+        # Token.objects.get_or_create(user=user)
         if user is not None:
+            token, _ = Token.objects.get_or_create(user=user) #Token generation upon successful authentication
             serializer = UserSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
