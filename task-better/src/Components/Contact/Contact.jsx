@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./Contact.css"
+
 const ContactPage = () => {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -16,6 +17,15 @@ const ContactPage = () => {
       };
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("Form Data: ", formData);
+        setFormData({
+            firstName:'',
+            lastName: '',
+            email: '',
+            message: ''
+        });
+        alert("Message successfully sent!");
+
     }
 
 
