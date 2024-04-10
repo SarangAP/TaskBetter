@@ -13,6 +13,7 @@ import ReactGA from "react-ga";
 import PrivacyPolicy from "./Components/Privacy/Privacy";
 import Terms from "./Components/Terms/Terms";
 import Leaderboard from "./Components/Leaderboard/Leaderboard";
+import ContactPage from "./Components/Contact/Contact";
 import ErrorPage from "./Components/404/404";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path="/privacy" element={<PrivacyPolicy/>} />
         <Route path="/terms" element={<Terms/>} />
+        <Route path="/contact-us" element={<ContactPage/>} />
         <Route path="/home" element={<Authenticated page={<Home/>}/>} />
         <Route path="/tasks" element={<Authenticated page={<TaskPage />}/>} />
         <Route path="/profile" element={<Authenticated page={<Profile />}/>} />
