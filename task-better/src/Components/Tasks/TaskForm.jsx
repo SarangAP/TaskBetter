@@ -9,6 +9,7 @@ const TaskForm = ({ addTask }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log(JSON.stringify({ title, description, completed, due_date }))
     // Check if title and description are empty
     if (title.trim() === "" || description.trim() === "" || due_date === "") {
       console.log("Title and description cannot be empty");
@@ -37,6 +38,7 @@ const TaskForm = ({ addTask }) => {
           setDueDate("");
         })
         .catch((error) => {
+          console.log('error')
           // Handle any errors
           console.error(error);
         });
