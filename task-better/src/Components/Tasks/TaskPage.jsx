@@ -14,7 +14,7 @@ const TaskPage = () => {
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  const temptasks = [
+ /* const temptasks = [
     {
       task_id: 2,
       title: "New Task",
@@ -45,7 +45,7 @@ const TaskPage = () => {
       user_id: 2,
       due_date: "2024-04-10", // Added due_date attribute
     },
-  ];
+  ];*/
   const fetchTasksOnLoad = async () => {
     fetch("http://127.0.0.1:8000/tasks/", {
       method: "GET",
@@ -157,7 +157,8 @@ const TaskPage = () => {
           <h4 className="m-2">Create a Task</h4>
           <TaskForm addTask={addTask} />
         </div>
-          <div className="col-md-4 mt-3">
+        <div className="col-md-1"></div>
+          <div className="col-md-3 mt-3 pt-4">
           <Calendar
             onChange={calDates}
             value={selectedDate}
@@ -166,10 +167,10 @@ const TaskPage = () => {
             onClickDay={handleDateClick}
           />
         </div>
-        <div className="col-md-5 mt-3">
-          <TasksView tasks={temptasks} handleDelete={deleteTask} handleUpdate={updateTask} />  
-        </div>
         <div className="col-md-1"></div>
+        <div className="col-md-4 mt-3">
+          <TasksView tasks={tasks} handleDelete={deleteTask} handleUpdate={updateTask} />  
+        </div>
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
