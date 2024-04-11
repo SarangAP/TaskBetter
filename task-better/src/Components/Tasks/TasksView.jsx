@@ -82,7 +82,7 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
             onChange={handleInputChange}
             value={filter}
           />
-        ) : (
+        ) : filterType === "date" ? (
           <input
             type="date"
             className="form-control"
@@ -90,7 +90,7 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
             value={filter}
             onChange={handleInputChange}
           />
-        )}
+        ) : (<></>)}
       </div>
       {tasks.length === 0 ? (
         <div className="row m-2 d-inline-block">
