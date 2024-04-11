@@ -14,6 +14,38 @@ const TaskPage = () => {
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const temptasks = [
+    {
+      task_id: 2,
+      title: "New Task",
+      description: "This is a new task",
+      created: "2024-03-21 18:37:26.996442",
+      modified: "2024-03-21 18:37:26.996463",
+      completed: 0,
+      user_id: 2,
+      due_date: "2024-04-15", // Added due_date attribute
+    },
+    {
+      task_id: 3,
+      title: "correct",
+      description: "asd",
+      created: "2024-03-21 18:39:45.645326",
+      modified: "2024-03-21 18:39:45.645368",
+      completed: 0,
+      user_id: 2,
+      due_date: "2024-04-20", // Added due_date attribute
+    },
+    {
+      task_id: 4,
+      title: "Another new task",
+      description: "Yet another task description",
+      created: "2024-03-21 19:00:32.814177",
+      modified: "2024-03-21 19:00:32.814191",
+      completed: 0,
+      user_id: 2,
+      due_date: "2024-04-10", // Added due_date attribute
+    },
+  ];
   const fetchTasksOnLoad = async () => {
     fetch("http://127.0.0.1:8000/tasks/", {
       method: "GET",
@@ -135,7 +167,7 @@ const TaskPage = () => {
           />
         </div>
         <div className="col-md-5 mt-3">
-          <TasksView tasks={tasks} handleDelete={deleteTask} handleUpdate={updateTask} />  
+          <TasksView tasks={temptasks} handleDelete={deleteTask} handleUpdate={updateTask} />  
         </div>
         <div className="col-md-1"></div>
       </div>

@@ -7,8 +7,11 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
   // const addTask = (task) => {
   //   setTasks([...tasks, task]);
   // }
-  const [filterType, setFilterType] = useState("name");
-  const [filter, setFilter] = useState('')
+  const [filterType, setFilterType] = useState("none");
+  const [filter, setFilter] = useState("");
+  const [filterTasks, setFilterTasks] = useState(tasks);
+
+  // You can use this 'tasks' array in your React component or elsewhere in your application.
   useEffect(() => {
     const fetchTasksOnLoad = async () => {
       fetch("http://127.0.0.1:8000/tasks/", {
@@ -28,8 +31,33 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
         });
     };
   }, []);
+
+  useEffect(() => {
+    const filterUpdate = () => {
+      const filterTasks = tasks.filter((task) => {
+        if (filterType === "none") {
+          return true;
+        }
+        if (filterType === "name") {
+          return task.title.includes(filter);
+        } else if (filterType === "date" && filter !== "") {
+          return task.due_date === filter;
+        }
+        return true; // Show all tasks if no filter applied
+      });
+      setFilterTasks(filterTasks);
+    };
+
+    filterUpdate(); // Call filterUpdate initially
+  }, [tasks, filterType, filter]); // Add filter and filterType as dependencies
+
   const handleSelectChange = (e) => {
     setFilterType(e.target.value);
+    setFilter('')
+  };
+
+  const handleInputChange = (e) => {
+    setFilter(e.target.value);
   };
   return (
     <div
@@ -41,6 +69,7 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
     >
       <div class="d-flex">
         <select class="col-md-3" onChange={handleSelectChange}>
+          <option value="none">None</option>
           <option value="name">Name</option>
           <option value="date">Date</option>
         </select>
@@ -50,8 +79,8 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
             className="form-control"
             id="title"
             placeholder="Task Title"
+            onChange={handleInputChange}
             value={filter}
-            onChange={(e) => setFilter(e.target.value)}
           />
         ) : (
           <input
@@ -59,7 +88,7 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
             className="form-control"
             id="dueDate"
             value={filter}
-            onChange={(e) => setFilter(e.target.value)}
+            onChange={handleInputChange}
           />
         )}
       </div>
@@ -70,7 +99,7 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
       ) : (
         <div className="row m-2 text-left">
           <ul>
-            {tasks.map((task) => (
+            {filterTasks.map((task) => (
               <TaskCard
                 task={task}
                 handleDelete={handleDelete}
