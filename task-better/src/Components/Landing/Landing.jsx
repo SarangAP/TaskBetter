@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import TaskBetter_Image from "../TBNav/TaskBetterLogo.svg";
 import "./Landing.css";
 import About from "./about.md";
-import MD_Renderer from "../Template/MD_Renderer";
+import MdRenderer from "../Template/MD_Renderer";
 
 const Landing = () => {
   const TeamMember = ({ firstName, lastName, title }) => {
@@ -53,7 +52,7 @@ const Landing = () => {
             <div className="col-lg-8 offset-lg-2">
               <h2 className="section-heading">About Us</h2>
               <div className="section-text">
-                <MD_Renderer path={About} />
+                <MdRenderer path={About} />
               </div>
             </div>
           </div>
