@@ -46,7 +46,6 @@ const Profile = () => {
       ) : user ? (
         <div className="user-information">
           
-            <Link to="/editprofile" className="btn btn-secondary">Edit Profile Information</Link>
           
           <div className="user-info">
             <p><b>User ID: </b> {user.id}</p>
@@ -67,6 +66,8 @@ const Profile = () => {
           <div className="user-info">
             <p><b>Date joined:</b> {user.date_joined}</p>
           </div>
+         <center><Link to="/editprofile" className="btn btn-secondary">Edit Profile Information</Link></center>
+
         </div>
       ) : (
         <p>Error loading profile</p>
