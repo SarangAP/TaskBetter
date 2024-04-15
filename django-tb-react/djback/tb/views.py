@@ -82,7 +82,7 @@ class SearchTaskView(APIView):
             except:
                 return Response({'error' : 'Invalid value for priority'}, status=status.HTTP_400_BAD_REQUEST)
 
-            tasks = tasks.filter(priority__gte=priority)
+            tasks = tasks.filter(priority=priority)
 
         completed = parameters.get("completed")
         if completed is not None:
