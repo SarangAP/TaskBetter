@@ -16,7 +16,8 @@ class Task(models.Model):
     priority = models.IntegerField(null=False, default=1)
     created = models.DateTimeField(default=timezone.now)
     modified = models.DateTimeField(default=timezone.now)
-    completed = models.BooleanField(default=False)
+    completed = models.IntegerField(null=False,default=0)
+    completed_date = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
         self.modified = timezone.now()
