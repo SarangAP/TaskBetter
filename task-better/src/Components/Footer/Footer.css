@@ -5,6 +5,7 @@
     position: relative;
     width: 100%;
     margin-top: auto;
+
   }
   
   .content {
@@ -39,7 +40,7 @@
 
   .newsletter {
     margin-top: -20px;
-    margin-left: 550px;
+    margin-left: 350px;
   }
   
   .newsletter input[type="email"] {
@@ -54,4 +55,11 @@
 
   .newsletter button:hover {
     background-color: green;
+  }
+  .logoTwo{
+    height:60px;
+    width:30px;
+    padding:10px;
+    margin-left: 150px;
+    align-items:horizontally;
   }

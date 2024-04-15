@@ -3,6 +3,9 @@ import "./Footer.css";
 import TaskBetter_Image from "../TBNav/TaskBetterLogo.svg"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { FaInstagram } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaTwitterSquare } from "react-icons/fa";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -23,6 +26,7 @@ const Footer = () => {
         <div className="logo">
           <img src={TaskBetter_Image} alt="TaskBetter Logo" />
         </div>
+       
         <nav className="footer-nav">
           <div className="link-title">
             <h2>Links</h2>
@@ -35,6 +39,15 @@ const Footer = () => {
             <li><a href="/terms">Terms & Conditions</a></li>
           </ul>
         </nav>
+        <div className="logoTwo">
+          <FaInstagram/>
+        
+      
+          <FaFacebook/>
+        
+      
+          <FaTwitterSquare/>
+        </div>
         <div className="newsletter">
           <h5>Sign up for our newsletter</h5>
           <form onSubmit={handleSubmit} >
