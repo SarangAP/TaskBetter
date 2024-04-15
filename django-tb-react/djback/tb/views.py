@@ -68,12 +68,11 @@ class TaskView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 class SearchTaskView(APIView):
-    #authentication_classes = [TokenAuthentication]
-    #permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        #tasks = Task.objects.filter(user_id=request.user.id)
-        tasks = Task.objects.all()
+        tasks = Task.objects.filter(user_id=request.user.id)
         parameters = self.request.query_params
 
         priority = parameters.get("priority")
