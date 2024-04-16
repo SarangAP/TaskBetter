@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from .models import *
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class TaskSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
@@ -10,7 +11,24 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ['task_id', 'title', 'description', 'created', 'modified', 'completed', 'user','username', 'due_date', 'priority']
+        fields = ['task_id', 'title', 'description', 'created', 'modified', 'completed', 'user','username', 'due_date', 'priority', 'completed_date']
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+        instance.priority = validated_data.get('priority', instance.priority)
+        instance.due_date = validated_data.get('due_date', instance.due_date)
+
+        new_completed = validated_data.get('completed', instance.completed)
+        if new_completed != instance.completed:
+            if new_completed == 2 and instance.completed != 2:
+                instance.completed_date = timezone.now()
+            if new_completed != 2 and instance.completed == 2:
+                instance.completed_date = None
+            instance.completed = new_completed
+
+        instance.save()
+        return instance
 
 class UserSerializer(serializers.ModelSerializer):
     token = serializers.ReadOnlyField(source='auth_token.key')
