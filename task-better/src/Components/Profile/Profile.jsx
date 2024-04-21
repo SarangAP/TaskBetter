@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./Profile.css";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -8,7 +9,7 @@ const Profile = () => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const response = await fetch('http://localhost:8000/profile/', {
+        const response = await fetch('http://35.221.5.174:8000/profile/', {
           method: 'GET',
             credentials: 'include',
             headers: {
@@ -44,6 +45,8 @@ const Profile = () => {
         <p>Loading profile info now</p> //sometimes doesn't load immediately
       ) : user ? (
         <div className="user-information">
+          
+          
           <div className="user-info">
             <p><b>User ID: </b> {user.id}</p>
           </div>
@@ -59,9 +62,12 @@ const Profile = () => {
           <div className="user-info">
             <p><b>Email: </b>{user.email}</p>
           </div>
+          
           <div className="user-info">
             <p><b>Date joined:</b> {user.date_joined}</p>
           </div>
+         <center><Link to="/editprofile" className="btn btn-secondary">Edit Profile Information</Link></center>
+
         </div>
       ) : (
         <p>Error loading profile</p>

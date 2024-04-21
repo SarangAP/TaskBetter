@@ -17,6 +17,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.db.models import Count, Q
+from django.core.exceptions import ValidationError
 
 from .models import *
 from .serializers import *
@@ -60,11 +61,48 @@ class TaskView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request):
+        print(request.data)
         task = get_object_or_404(Task, task_id=request.data['task_id'])
         if request.user != task.user:
             return Response({'error' : 'User does not own this task'}, status=status.HTTP_401_UNAUTHORIZED)
         task.delete()
         return Response(status=status.HTTP_200_OK)
+
+class SearchTaskView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        tasks = Task.objects.filter(user_id=request.user.id)
+        parameters = self.request.query_params
+
+        priority = parameters.get("priority")
+        if priority is not None:
+            try:
+                priority = int(priority)
+            except:
+                return Response({'error' : 'Invalid value for priority'}, status=status.HTTP_400_BAD_REQUEST)
+
+            tasks = tasks.filter(priority=priority)
+
+        completed = parameters.get("completed")
+        if completed is not None:
+            try:
+                completed = int(completed)
+            except:
+                return Response({'error' : 'Invalid value for completed'}, status=status.HTTP_400_BAD_REQUEST)
+
+            tasks = tasks.filter(completed=completed)
+
+        created = parameters.get("created")
+        if created is not None:
+            try:
+                tasks = tasks.filter(created=created)
+            except ValidationError as e:
+                return Response({"error" : e}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = TaskSerializer(tasks, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class LoginView(APIView):
     def post(self, request):
@@ -114,6 +152,15 @@ class ProfileView(APIView):
         serializer = UserSerializer(user)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request):
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class LogoutView(APIView):
     authentication_classes = [TokenAuthentication]
