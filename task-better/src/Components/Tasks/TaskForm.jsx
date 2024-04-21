@@ -3,19 +3,20 @@ import React, { useState } from "react";
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(0);
   const [due_date, setDueDate] = useState(new Date());
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log(JSON.stringify({ title, description, completed, due_date }))
     // Check if title and description are empty
     if (title.trim() === "" || description.trim() === "" || due_date === "") {
       console.log("Title and description cannot be empty");
       alert("Please fill out all the field");
       // return;
     } else {
-      fetch("http://127.0.0.1:8000/tasks/", {
+      fetch("http://35.221.5.174:8000/tasks/", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -37,6 +38,7 @@ const TaskForm = ({ addTask }) => {
           setDueDate("");
         })
         .catch((error) => {
+          console.log('error')
           // Handle any errors
           console.error(error);
         });

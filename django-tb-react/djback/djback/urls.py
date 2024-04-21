@@ -28,4 +28,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name="logout"),
     path('leaderboard/', LeaderboardView.as_view(), name='leaderboard'),
     path('leaderboard/<int:count>', LeaderboardView.as_view(), name='leaderboard_with_count'),
+    path('search/', SearchTaskView.as_view()),
 ]

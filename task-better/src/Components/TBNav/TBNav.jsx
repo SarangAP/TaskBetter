@@ -15,7 +15,7 @@ const TBNav = () => {
   const logout = async () => {
     /*Need to add the back end request for logout if implemented*/
     try {
-      const response = await fetch("http://localhost:8000/logout/", {
+      const response = await fetch("http://35.221.5.174:8000/logout/", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -76,12 +76,26 @@ const TBNav = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/leaderboard">
+                Leaderboard
+              </Link>
+            </li>
+            <li className="nav-item">
               <label className="nav-link" onClick={handleProfileClick}>
                 More
               </label>
               {showAccountMenu ? (
                 <div className="h-auto w-10 position-absolute d-flex flex-column rounded-4 dropdown p-4" style={{'z-index': '1000'}}>
                   <p onClick={closeAccountMenu}>Click to Close</p>
+                  <Link className="nav-link" to="/privacy">
+                    Privacy Policy
+                  </Link>
+                  <Link className="nav-link" to="/terms">
+                    Terms & Conditions
+                  </Link>
+                  <Link className="nav-link" to="/contact-us">
+                    Contact Us
+                  </Link>
                   <label className="nav-link" onClick={logout}>
                     Logout
                   </label>
