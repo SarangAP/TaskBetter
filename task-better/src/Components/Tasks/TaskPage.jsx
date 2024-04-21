@@ -47,7 +47,7 @@ const TaskPage = () => {
     },
   ];*/
   const fetchTasksOnLoad = async () => {
-    fetch("http://127.0.0.1:8000/tasks/", {
+    fetch("http://35.221.5.174:8000/tasks/", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -84,7 +84,7 @@ const TaskPage = () => {
   const deleteTask = (taskD) => {
     // Sending backend DELETE req to delete task
     taskD.delete = true
-    fetch("http://127.0.0.1:8000/tasks/", {
+    fetch("http://35.221.5.174:8000/tasks/", {
       method: "DELETE",
       credentials: "include",
       headers: {
@@ -99,7 +99,7 @@ const TaskPage = () => {
       .catch(error => {
         console.log("Error deleting task", error)
       })
-    const updatedTasks = tasks.filter(task => task.task_id != taskD.task_id)
+    const updatedTasks = tasks.filter(task => task.task_id !== taskD.task_id)
     setTasks(updatedTasks)
   };
 
@@ -107,7 +107,7 @@ const TaskPage = () => {
   // such that when completed updates backend
   const updateTask = (taskU) => {
     console.log(taskU)
-    fetch("http://127.0.0.1:8000/tasks/", {
+    fetch("http://35.221.5.174:8000/tasks/", {
       method: "PUT",
       credentials: "include",
       headers: {

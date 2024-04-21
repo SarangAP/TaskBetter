@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const response = await fetch('http://localhost:8000/profile/', {
+        const response = await fetch('http://35.221.5.174:8000/profile/', {
           method: 'GET',
             credentials: 'include',
             headers: {
