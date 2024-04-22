@@ -15,7 +15,7 @@ const TBNav = () => {
   const logout = async () => {
     /*Need to add the back end request for logout if implemented*/
     try {
-      const response = await fetch("http://35.221.5.174:8000/logout/", {
+      const response = await fetch("http://127.0.0.1:8000/logout/", {
         method: "POST",
         credentials: "include",
         headers: {
