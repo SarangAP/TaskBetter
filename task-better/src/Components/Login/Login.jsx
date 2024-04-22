@@ -27,7 +27,7 @@ const Login = ({ }) => {
   const handleLogin = async () => {
     try {
       console.log("Before fetch:", username, password);
-      const response = await fetch("http://35.221.5.174:8000/login/", {
+      const response = await fetch("http://127.0.0.1:8000/login/", {
         method: "POST",
         credentials: "include",
         headers: {

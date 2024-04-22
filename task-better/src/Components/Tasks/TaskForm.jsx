@@ -16,7 +16,7 @@ const TaskForm = ({ addTask }) => {
       alert("Please fill out all the field");
       // return;
     } else {
-      fetch("http://35.221.5.174:8000/tasks/", {
+      fetch("http://127.0.0.1:8000/tasks/", {
         method: "POST",
         credentials: "include",
         headers: {
