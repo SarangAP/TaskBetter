@@ -33,11 +33,19 @@ const TaskCard = ({ task, handleDelete, handleUpdate }) => {
     setCanEdit(!canEdit);
     setIsRotated(true);
   };
+  /*
   const handleComplete = () => {
     task.completed = !completed;
     handleUpdate(task);
     setCompleted(!completed);
   };
+  */
+ const handleComplete = () => {
+    const newCompleted = completed === 0 ? 2 : 0;
+    setCompleted(newCompleted);
+    const updatedTask = { ...task, completed: newCompleted};
+    handleUpdate(updatedTask);
+ }
   const handleDescChange = (e) => {
     setDesc(e.target.value);
   };
