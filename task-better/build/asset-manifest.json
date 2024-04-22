@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.640fb241.css",
-    "main.js": "/static/js/main.2e623eee.js",
+    "main.js": "/static/js/main.bc6b614b.js",
     "static/js/453.e1e64b6c.chunk.js": "/static/js/453.e1e64b6c.chunk.js",
     "static/media/TaskBetterLogo.svg": "/static/media/TaskBetterLogo.edff39798d8d0be684a6ecb847b4640f.svg",
     "static/media/Privacy.md": "/static/media/Privacy.044a4e0ba8129d9c0398.md",
@@ -11,11 +11,11 @@
     "index.html": "/index.html",
     "static/media/about.md": "/static/media/about.878165bfdd8eb0d9a507.md",
     "main.640fb241.css.map": "/static/css/main.640fb241.css.map",
-    "main.2e623eee.js.map": "/static/js/main.2e623eee.js.map",
+    "main.bc6b614b.js.map": "/static/js/main.bc6b614b.js.map",
     "453.e1e64b6c.chunk.js.map": "/static/js/453.e1e64b6c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.640fb241.css",
-    "static/js/main.2e623eee.js"
+    "static/js/main.bc6b614b.js"
   ]
 }
