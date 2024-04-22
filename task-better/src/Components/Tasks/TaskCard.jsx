@@ -34,9 +34,10 @@ const TaskCard = ({ task, handleDelete, handleUpdate }) => {
     setIsRotated(true);
   };
   const handleComplete = () => {
-    task.completed = !completed;
+    // update to handle new logic
+    task.completed = (task.completed + 1) % 3;
     handleUpdate(task);
-    setCompleted(!completed);
+    setCompleted(task.completed);
   };
   const handleDescChange = (e) => {
     setDesc(e.target.value);
