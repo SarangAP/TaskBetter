@@ -15,7 +15,7 @@ const TBNav = () => {
   const logout = async () => {
     /*Need to add the back end request for logout if implemented*/
     try {
-      const response = await fetch("http://35.221.5.174:8000/logout/", {
+      const response = await fetch("http://127.0.0.1:8000/logout/", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -42,7 +42,7 @@ const TBNav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link className="navbar-brand" to="/home">
+        <Link className="navbar-brand" to="/tasks">
           {/*<img src={TaskBetter_Image} alt="TaskBetter Logo" />*/}
           <label className="fs-2">Task</label><label className="fs-2" style={{'color':'#008be6'}}>Better</label>
         </Link>
@@ -60,11 +60,6 @@ const TBNav = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link hoverlink" to="/home">
-                Home
-              </Link>
-            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/tasks">
                 Tasks

@@ -14,7 +14,7 @@ function TasksView({ tasks, handleDelete, handleUpdate }) {
   // You can use this 'tasks' array in your React component or elsewhere in your application.
   useEffect(() => {
     const fetchTasksOnLoad = async () => {
-      fetch("http://35.221.5.174:8000/tasks/", {
+      fetch("http://127.0.0.1:8000/tasks/", {
         method: "GET",
         credentials: "include",
         headers: {

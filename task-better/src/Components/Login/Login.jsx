@@ -18,8 +18,8 @@ const Login = ({ }) => {
   useEffect(() => {
     const sessionToken = sessionStorage.getItem("token");
     if (sessionToken) {
-      // Session token exists, navigate to the home page
-      window.location.href = "/home";
+      // Session token exists, navigate to the tasks page
+      window.location.href = "/tasks";
     }
     // Add other logic or cleanup if needed
   }, []);
@@ -27,7 +27,7 @@ const Login = ({ }) => {
   const handleLogin = async () => {
     try {
       console.log("Before fetch:", username, password);
-      const response = await fetch("http://35.221.5.174:8000/login/", {
+      const response = await fetch("http://127.0.0.1:8000/login/", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -44,7 +44,7 @@ const Login = ({ }) => {
         response.json().then((data) => {
           sessionStorage.setItem("token", data.token);
           sessionStorage.setItem("user", JSON.stringify(data));
-          navigate("/home", { state: { currentUser: data } });
+          navigate("/tasks", { state: { currentUser: data } });
         });
       } else {
         const data = await response.json();
