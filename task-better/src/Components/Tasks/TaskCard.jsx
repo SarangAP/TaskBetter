@@ -11,7 +11,7 @@ const TaskCard = ({ task, handleDelete, handleUpdate }) => {
   const [canEdit, setCanEdit] = useState(false);
   const [desc, setDesc] = useState(task.desctiption);
   const [due_date, setDueDate] = useState(task.due_date);
-  const [priority, setPriority] = useState(task.priority);
+  const [priority, setPriority] = useState(task.priority );
 
   useEffect(() => {
     setDesc(task.description || "");

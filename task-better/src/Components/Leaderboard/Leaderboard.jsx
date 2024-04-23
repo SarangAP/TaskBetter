@@ -33,6 +33,7 @@ const Leaderboard = () => {
                   <th>Rank</th>
                   <th>Username</th>
                   <th>Tasks Completed</th>
+                  <th>Total Score</th>
                 </tr>
               </thead>
               <tbody>
@@ -41,6 +42,7 @@ const Leaderboard = () => {
                     <td>{index + 1}</td>
                     <td>{user.username}</td>
                     <td>{user.completed_tasks}</td>
+                    <td>{user.total_score}</td>
                   </tr>
                 ))}
               </tbody>
