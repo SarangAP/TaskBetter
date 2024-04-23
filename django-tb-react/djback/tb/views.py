@@ -177,6 +177,17 @@ class LogoutView(APIView):
 
 class LeaderboardView(APIView):
     def get(self, request, count=10):
-        top_users = User.objects.annotate(completed_tasks=Count("task", filter=Q(task__completed=2))).order_by("-completed_tasks")[:count]
-        serializer = LeaderboardSerializer(top_users, many=True, context={'top_users' : top_users})
+        #top_users = User.objects.annotate(completed_tasks=Count("task", filter=Q(task__completed=2))).order_by("-completed_tasks")[:count]
+        top_users = User.objects.annotate(
+            completed_tasks=Count("task", filter=Q(task__completed=2))
+        ).order_by("-completed_tasks")[:count]
+        
+        top_users = top_users.prefetch_related('task_set')
+
+        #serializer = LeaderboardSerializer(top_users, many=True, context={'top_users' : top_users})
+        serializer = LeaderboardSerializer(
+            top_users,
+            many=True,
+            context={'top_users': top_users}
+        )
         return Response(serializer.data, status=status.HTTP_200_OK)

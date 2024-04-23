@@ -39,12 +39,26 @@ class UserSerializer(serializers.ModelSerializer):
 class LeaderboardSerializer(serializers.ModelSerializer):
     rank = serializers.SerializerMethodField()
     completed_tasks = serializers.IntegerField()
+    total_score = serializers.SerializerMethodField()
 
     def get_rank(self, obj):
         top_users = self.context.get('top_users')
         rank = list(top_users).index(obj) + 1
         return rank
 
+    def get_total_score(self, obj):
+        completed_tasks = obj.task_set.filter(completed=2)
+        total_score = sum(
+            {
+                #Priority 1-4 point assignments
+                1: 13,
+                2: 7,   
+                3: 4,
+                4: 1
+            }.get(task.priority, 0) for task in completed_tasks
+        )
+        return total_score
+    
     class Meta:
         model = User
-        fields = ("rank", "username", "completed_tasks")
+        fields = ("rank", "username", "completed_tasks", "total_score")
