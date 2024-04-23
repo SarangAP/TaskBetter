@@ -67,7 +67,7 @@ const Leaderboard = () => {
               },
               ticks: {
                 font: {
-                  size: 20,
+                  size: 23,
                   color: 'black'
                 }
               }

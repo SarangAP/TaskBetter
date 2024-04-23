@@ -185,7 +185,7 @@ const TaskPage = () => {
                 <p>Description: {task.description}</p>
                 <p>Due date: {moment(task.due_date).format("MM/DD/YYYY")}</p>
                 <p>Priority: {task.priority}</p>
-                <p>Completed: {task.completed.toString()}</p>
+                <p>Completed: {task.completed === 2 ? "Yes" : "No"}</p>
                 <p>Task created: {moment(task.created).format("MMMM DD, YYYY h:mm:ss A")}</p>
               </li>
             ))}

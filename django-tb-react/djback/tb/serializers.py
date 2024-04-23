@@ -51,9 +51,9 @@ class LeaderboardSerializer(serializers.ModelSerializer):
         total_score = sum(
             {
                 #Priority 1-4 point assignments
-                1: 10,
-                2: 5,   
-                3: 3,
+                1: 13,
+                2: 7,   
+                3: 4,
                 4: 1
             }.get(task.priority, 0) for task in completed_tasks
         )
