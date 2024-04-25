@@ -4,7 +4,8 @@ from django.core.exceptions import ValidationError
 from .models import *
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.contrib import admin
+from .models import Task
 class TaskSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
     due_date = serializers.DateField(format='iso-8601')
@@ -62,3 +63,5 @@ class LeaderboardSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("rank", "username", "completed_tasks", "total_score")
+
+admin.site.register(Task)

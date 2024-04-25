@@ -18,3 +18,23 @@
     padding: 8x;
   }
   
+  .tasks-insights {
+    display: flex;
+    margin-bottom: 35px;
+
+  }
+  .priority-chart canvas {
+    width: 490px;
+    height: auto;
+  }
+
+  .pie-chart{
+    width: 400px;
+    height: 300px;
+  }
+
+  .created-chart canvas {
+    width: 490px;
+    height: auto;
+  }
+  
