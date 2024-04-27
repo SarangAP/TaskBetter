@@ -57,8 +57,8 @@ const Login = ({ }) => {
 
 return (
   <div className="login-container">
-    <div className="logo-img">
-    <img src={TaskBetter_Image} alt="TaskBetter Logo" />
+    <div className="logo-img"> 
+          <label className="fs-1">Task</label><label className="fs-1" style={{'color':'#008be6'}}>Better</label>
     </div>
     <div className="loginHeader">
       <div className="login-title">Login</div>

@@ -1,65 +1,88 @@
 .footer {
-    background-color: #1f1e1e;
-    color: #c9baba;
-    padding: 0px 0;
-    position: relative;
-    width: 100%;
-    margin-top: auto;
+  background-color: #1f1e1e;
+  color: #c9baba;
+  padding: 0px 0;
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+}
 
-  }
-  
-  .content {
-    max-width: 1300px ;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo img {
-    width: 200px;
-    margin-right: 100px;
-  }
+.content {
+  max-width: 1300px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.logo img {
+  width: 200px;
+  margin-right: 100px;
+}
 
 .copyright {
   text-align: center;
 }
+
 .footer-nav {
   margin-top: 10px;
-  }
+}
 
-  .link-title {
-    text-align: center;
-    margin-bottom: 10px;
-  }
+.footer-nav ul{
+  width: 160px;
+}
 
-  .link-title h2 {
-    font-size: 25px;
-    font-weight: bold;
-    text-decoration: underline;
-  }
+.footer-lists {
+  display: flex;
+  width: fit-content;
+  list-style: none;
+}
 
-  .newsletter {
-    margin-top: -20px;
-    margin-left: 350px;
-  }
-  
-  .newsletter input[type="email"] {
-    margin-right: 5px;
-  }
-  .newsletter button {
-    color:black;
-    background-color: white;
-    border: 0.5px solid black;
-    cursor: pointer;
-  }
+.footer-li {
+  list-style: none;
+}
 
-  .newsletter button:hover {
-    background-color: green;
-  }
-  .logoTwo{
-    height:60px;
-    width:30px;
-    padding:10px;
-    margin-left: 150px;
-    align-items:horizontally;
-  }
+.footer-li:hover{
+  text-decoration-line: underline;
+}
+
+.footer-li a {
+  text-decoration: none;
+  color: #c9baba;
+}
+
+.link-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.link-title h2 {
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.newsletter {
+  margin-top: -20px;
+}
+
+.newsletter input[type="email"] {
+  margin-right: 5px;
+}
+
+.newsletter button {
+  color: black;
+  background-color: white;
+  border: 0.5px solid black;
+  cursor: pointer;
+}
+
+.newsletter button:hover {
+  background-color: green;
+}
+
+.logoTwo {
+  height: 60px;
+  width: 30px;
+  padding: 10px;
+  margin-left: 150px;
+  align-items: horizontally;
+}

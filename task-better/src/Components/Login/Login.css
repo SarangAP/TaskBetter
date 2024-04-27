@@ -2,7 +2,7 @@
     background: #e0e0f3;
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 50px;
     margin-bottom:130px;
     height: fit-content;
     width: 500px;
@@ -14,6 +14,10 @@
 .logo-img{
     width:250px;
     margin-top: 20px;
+    display: flex;
+    height: fit-content;
+    align-items:center;
+    justify-content: center;
 }
 .loginHeader {
     margin-top: 0px;
@@ -24,13 +28,13 @@
 }
 
 .login-title{
-    color: #2700e9;
+    color: #272b2e;
     font-size: 52px;
     font-weight: 720;
 }
 
 .login-underline{
-    background: #2700e9;
+    background: #008be6;
     width: 80px;
     height: 5px;
     border-radius: 10px;
@@ -78,7 +82,7 @@
     justify-content: center;
     cursor: pointer;
     align-items: center;
-    background: #2700e9;
+    background: #008be6;
     border-radius: 35px;
     color:#ffffff;
     font-size: 20px;
